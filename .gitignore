@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+emergency-db/
+emergency-library/
+*.log
+.DS_Store
