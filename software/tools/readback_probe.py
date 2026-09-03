@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Data-integrity probe: does what we WRITE actually land where we point?
-1) LISAR register write/readback stress (30x) — catches SPI corruption on
+1) LISAR register write/readback stress (30x) - catches SPI corruption on
    register writes (the mechanism that would displace whole frames).
-2) Full-frame load, then MEM_BST_RD readback at 3 row offsets — compares
+2) Full-frame load, then MEM_BST_RD readback at 3 row offsets - compares
    wire-expected bytes vs controller RAM, and scans for displaced markers.
 Run with noah-ui STOPPED."""
 import sys, time

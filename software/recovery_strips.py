@@ -2,7 +2,7 @@
 """One-time glass recovery using ONLY the typing-strip op class:
 full-width strip loads + strip displays from the MAIN buffer (the exact
 mechanics the typing path has proven for weeks; <=128px tall, ~8% of pixels
-per op — power-safe and protocol-safe). Black sweep, white sweep — every
+per op - power-safe and protocol-safe). Black sweep, white sweep - every
 pixel actively driven twice, wiping today's garbage and resyncing the
 controller's frame state. Leaves the glass white; the service restart
 paints home. Run with the noah-ui service STOPPED."""
@@ -28,4 +28,4 @@ for name, strip in (("black", black), ("white", white)):
         EPD._display(eink.MODE_DU, 0, y, W, STRIP)
     stamp("%s sweep done" % name)
 
-stamp("recovery complete — glass should be uniform white")
+stamp("recovery complete - glass should be uniform white")

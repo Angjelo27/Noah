@@ -6,15 +6,15 @@ connect or disconnect anything with power applied.**
 
 ## 1. E-ink panel (Waveshare IT8951 HAT (B))
 
-The HAT is *not* stacked on the 40-pin header — it is wired with individual
+The HAT is *not* stacked on the 40-pin header - it is wired with individual
 jumpers so the enclosure can position it freely. The HAT header follows the
 Raspberry Pi layout, so pin numbers match on both ends.
 
 | Signal | Jetson 40-pin | HAT pin | Notes |
 |---|---|---|---|
-| 5V | pin 2 (and 4) | 5V (2/4) | ⚠️ One jumper sags under load — see §4. |
+| 5V | pin 2 (and 4) | 5V (2/4) | ⚠️ One jumper sags under load - see §4. |
 | GND | pin 6 (add 9/14) | GND (6/9/14) | More grounds = better. |
-| SCK | pin 23 (SPI1_SCK) | CLK | 4 MHz max on jumper wiring — 12 MHz corrupts commands. |
+| SCK | pin 23 (SPI1_SCK) | CLK | 4 MHz max on jumper wiring - 12 MHz corrupts commands. |
 | MOSI | pin 19 (SPI1_MOSI) | DIN | |
 | MISO | pin 21 (SPI1_MISO) | DOUT | |
 | CS | pin 24 | CS | Driven as GPIO (gpiochip0 line 136), not hardware CS. |
@@ -29,7 +29,7 @@ SPI 4 MHz, 4-bits-per-pixel transfers.
 included [`fix-gpio-pinmux.service`](../software/system/fix-gpio-pinmux.service)
 writes the pad registers with `busybox devmem` at every boot (SPI1 pads to
 SFIO, CS and RST to GPIO, LED pads). Without it the panel reads all zeros.
-Do not rely on `jetson-io` overlays — on this system they silently fail to
+Do not rely on `jetson-io` overlays - on this system they silently fail to
 apply at boot.
 
 ## 2. Power button
@@ -52,7 +52,7 @@ key events; systemd-logind is told to ignore the key):
 
 Both shine through the printed `NOAH_LED_Lens.stl`.
 
-## 4. Power — read this twice
+## 4. Power - read this twice
 
 - Supply: USB-C PD, **15 V profile** (65 W class). The Jetson barrel/USB-C
   input takes it directly.

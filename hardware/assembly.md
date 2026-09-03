@@ -1,7 +1,7 @@
 # Assembly notes
 
 The enclosure is a printed clamshell: main shell + front plate + screen visor
-+ base plate + two side plates + TPU bumpers. Fit is magnet-and-rail based —
++ base plate + two side plates + TPU bumpers. Fit is magnet-and-rail based -
 no glue on the main joints.
 
 ## Before printing everything
@@ -20,22 +20,22 @@ snugly.
 2. **Screen + visor**: the panel sits in the front opening, held by
    `NOAH_ScreenRetainer.stl`; the visor (`NOAH_Visor.stl`) carries the
    window and clicks onto the shell with the 7 magnets (pockets in both
-   parts — glue magnets with CA, mind the polarity, check twice before the
+   parts - glue magnets with CA, mind the polarity, check twice before the
    glue sets).
 3. **Jetson + driver board** mount inside the main shell (`NOAH_Shell.stl`)
    on the printed rails/bosses. The IT8951 driver board sits behind the
-   panel; keep the panel FPC gentle — no sharp folds.
+   panel; keep the panel FPC gentle - no sharp folds.
 4. **Keyboard bay**: the BB Q10 module drops into the keyboard bay in the
-   front plate (`NOAH_FrontPlate.stl`). It is wireless — only its charging
+   front plate (`NOAH_FrontPlate.stl`). It is wireless - only its charging
    lead needs routing.
 5. **Button + LEDs**: the momentary button mounts in its shell hole and wires
    to the J14 header; the two LEDs sit behind `NOAH_LED_Lens.stl`.
-6. **Side plates** (`NOAH_SidePlate_L/R.stl`) — note they are DIFFERENT
+6. **Side plates** (`NOAH_SidePlate_L/R.stl`) - note they are DIFFERENT
    designs, not mirrors: left is the camo plate, right carries the louver
    vents. They close the sides after the harness is in.
 7. **Base plate** (`NOAH_BasePlate.stl`) closes the bottom.
 8. **Bumpers**: TPU corner/edge bumpers (`bumpers/`, plus
-   `NOAH_Bumper_*.stl`) press onto the shell — print them last, they hide
+   `NOAH_Bumper_*.stl`) press onto the shell - print them last, they hide
    layer seams and take the drops.
 9. *(Optional)* **Solar**: thin panel into the back recess, held by
    `NOAH_SolarTabLock_L/R.stl`.

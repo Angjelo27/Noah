@@ -2,7 +2,7 @@
 """NOAH deterministic safety overrides.
 
 Keyword-triggered, pre-written warnings prepended before the LLM answer.
-No LLM involved: regex in, fixed text out. Bilingual by construction —
+No LLM involved: regex in, fixed text out. Bilingual by construction -
 English patterns run against the MT-translated query, Albanian patterns
 against the raw input as a second net. Warnings are phrased conditionally
 so a false positive is harmless and a miss is the only failure that costs.
@@ -14,8 +14,8 @@ RULES = [
     ("unconscious",
      r"unconscious|not responding|unresponsive|won'?t wake|passed out|knocked out|no feelings",
      r"pa ndjenja|pa vet[ëe]dije|s'?ka ndjenja|humbur (ndjenjat|vet[ëe]dijen)|nuk zgjohet|pa nd[ëe]rgjegje|ra t[ëe] fik[ëe]t",
-     "WARNING: An unconscious person must NEVER be given anything by mouth — no water, food, or medicine (choking danger).",
-     "KUJDES: Një personi pa vetëdije MOS i jepni kurrë asgjë nga goja — as ujë, as ushqim, as ilaçe (rrezik mbytjeje)."),
+     "WARNING: An unconscious person must NEVER be given anything by mouth - no water, food, or medicine (choking danger).",
+     "KUJDES: Një personi pa vetëdije MOS i jepni kurrë asgjë nga goja - as ujë, as ushqim, as ilaçe (rrezik mbytjeje)."),
 
     ("not-breathing",
      r"not breathing|stopped breathing|isn'?t breathing|no pulse|no breath|collapsed",
@@ -32,8 +32,8 @@ RULES = [
     ("anaphylaxis",
      r"sting|stung|wasp|\bbee\b|hornet|allergic|anaphyla",
      r"picko\w*|pickuar|pickim|thumbo\w*|thumbim|grenz[ëae]\w*|blet[ëae]\w*|alergji|akrep\w*|ther\w*.{0,22}(blet[ëae]|grenz[ëae])",
-     "WARNING: Face swelling or trouble breathing after a sting is a severe allergic emergency. Use an epinephrine auto-injector (EpiPen) NOW if available. Scrape a bee stinger off the skin quickly — do not squeeze it.",
-     "KUJDES: Fryrja e fytyrës ose vështirësia në frymëmarrje pas pickimit është urgjencë e rëndë alergjike. Përdor MENJËHERË autoinjektorin e epinefrinës (EpiPen) nëse e ke. Hiqe thumbin duke e kruar shpejt nga lëkura — mos e shtrydh."),
+     "WARNING: Face swelling or trouble breathing after a sting is a severe allergic emergency. Use an epinephrine auto-injector (EpiPen) NOW if available. Scrape a bee stinger off the skin quickly - do not squeeze it.",
+     "KUJDES: Fryrja e fytyrës ose vështirësia në frymëmarrje pas pickimit është urgjencë e rëndë alergjike. Përdor MENJËHERË autoinjektorin e epinefrinës (EpiPen) nëse e ke. Hiqe thumbin duke e kruar shpejt nga lëkura - mos e shtrydh."),
 
     ("impaled",
      r"knife in|stuck in (his|her|my|the) (?!throat|windpipe|mouth)|impaled|nail in|embedded in|object in (his|her|my|the) (?!throat|windpipe|mouth)",
@@ -44,8 +44,8 @@ RULES = [
     ("spinal",
      r"(fell|fall|hit).{0,40}(neck|back|spine)|neck.{0,20}(hurt|pain|injur)|spinal|spine|can'?t (feel|move).{0,15}(legs|arms)|no feeling in.{0,10}legs",
      r"qaf[ëae].{0,25}(dhemb|dhimbje|lëndu|lendu)|(ra|u rr[ëe]zua).{0,40}(qaf[ëae]|kurriz|shpin[ëe])|kurriz|shtyll[ëe]s? kurrizore|nuk (i |e )?(ndjen|l[ëe]viz)\w*.{0,20}(k[ëe]mb[ëe]t|duart|gjymtyr)|(ra|u rr[ëe]zua) (nga|n[ëe]) ([çc]atia|pema|lart[ëe]sia|kali|traktori|shkall\w*)|aksident\w* (me )?(makin[ëe]|motor\w*)|ra nga motori",
-     "WARNING: Possible spinal injury — do NOT move the person or their head/neck unless they are in immediate danger. Do not let them sit up or walk.",
-     "KUJDES: Dëmtim i mundshëm i shtyllës kurrizore — MOS e lëviz personin as kokën/qafën, veç nëse është në rrezik të menjëhershëm. Mos e lër të ngrihet a të ecë."),
+     "WARNING: Possible spinal injury - do NOT move the person or their head/neck unless they are in immediate danger. Do not let them sit up or walk.",
+     "KUJDES: Dëmtim i mundshëm i shtyllës kurrizore - MOS e lëviz personin as kokën/qafën, veç nëse është në rrezik të menjëhershëm. Mos e lër të ngrihet a të ecë."),
 
     ("poison",
      r"poison|overdose|(swallowed|ate|took) (bleach|chemical|detergent|kerosene|gasoline|petrol|pills|medicine|medicines|tablets)|drank (bleach|chemical|detergent|kerosene|gasoline|petrol|lamp oil|lighter fluid|paraffin)",
@@ -74,20 +74,20 @@ RULES = [
     ("childbirth",
      r"labor|contractions|giving birth|baby is coming|pregnan\w*.{0,35}(pain|labou?r|contract)",
      r"dhimbjet? e lindjes|po lind\b|shtatz[ëe]n[ëae].{0,40}dhimbje|i erdhi koha e lindjes",
-     "WARNING: If the baby is coming and you cannot reach medical care: use clean hands and clean cloths. Let the birth happen naturally — do NOT pull the baby and do NOT press on the belly. Dry the baby, place it skin-to-skin on the mother's chest and cover both. Do not cut the cord without clean tools. Get medical help.",
-     "KUJDES: Nëse foshnja po vjen dhe s'arrini dot te mjeku: duar dhe rroba të pastra. Lëreni lindjen të ndodhë natyrshëm — MOS e tërhiqni foshnjën dhe MOS e shtypni barkun. Thajeni foshnjën, vendoseni lëkurë-më-lëkurë në gjoksin e nënës dhe mbulojini të dy. Mos e prisni kërthizën pa vegla të pastra. Kërkoni ndihmë mjekësore."),
+     "WARNING: If the baby is coming and you cannot reach medical care: use clean hands and clean cloths. Let the birth happen naturally - do NOT pull the baby and do NOT press on the belly. Dry the baby, place it skin-to-skin on the mother's chest and cover both. Do not cut the cord without clean tools. Get medical help.",
+     "KUJDES: Nëse foshnja po vjen dhe s'arrini dot te mjeku: duar dhe rroba të pastra. Lëreni lindjen të ndodhë natyrshëm - MOS e tërhiqni foshnjën dhe MOS e shtypni barkun. Thajeni foshnjën, vendoseni lëkurë-më-lëkurë në gjoksin e nënës dhe mbulojini të dy. Mos e prisni kërthizën pa vegla të pastra. Kërkoni ndihmë mjekësore."),
 
     ("fever",
      r"high fever|fever.{0,30}(days|for \d)|temperature.{0,20}(high|days)",
      r"ethe t[ëe] larta|ethe.{0,25}dit[ëe]|temperatur[ëe].{0,15}e lart[ëe]|flam[ëae]|i (hipen|hipi|u ngjit) temperatura",
-     "WARNING: High fever lasting more than 2 days needs a health worker — it can be malaria, typhoid or another infection that needs diagnosis. Meanwhile: plenty of fluids, light clothing, cool sponging. Do NOT start antibiotics on your own.",
-     "KUJDES: Ethe të larta mbi 2 ditë duan mjek — mund të jetë malarie, tifo a një infeksion tjetër që duhet diagnostikuar. Ndërkohë: shumë lëngje, rroba të lehta, fshirje me leckë të vakët. MOS fillo antibiotikë me kokën tënde."),
+     "WARNING: High fever lasting more than 2 days needs a health worker - it can be malaria, typhoid or another infection that needs diagnosis. Meanwhile: plenty of fluids, light clothing, cool sponging. Do NOT start antibiotics on your own.",
+     "KUJDES: Ethe të larta mbi 2 ditë duan mjek - mund të jetë malarie, tifo a një infeksion tjetër që duhet diagnostikuar. Ndërkohë: shumë lëngje, rroba të lehta, fshirje me leckë të vakët. MOS fillo antibiotikë me kokën tënde."),
 
     ("dental",
      r"(broken|knocked.?out|lost|chipped|pulled|extracted|removed).{0,15}tooth|tooth.{0,25}(broke|knocked|fell|pulled|extracted|removed|out)",
      r"(thye|ra|r[ëe]n[ëe]|doli|hoq\w*|u thye).{0,18}dh[ëe]mb\w*|dh[ëe]mb\w*.{0,22}(thye|\bra\b|r[ëe]n[ëe]|doli)",
-     "WARNING: Mouth bleeding: bite firmly on a clean folded cloth for 15 minutes. If a permanent tooth came out whole, do NOT scrub it — keep it in milk or in the person's own saliva and see a dentist within a few hours; it can sometimes be saved.",
-     "KUJDES: Gjakderdhje nga goja: kafshoni fort një leckë të pastër të palosur për 15 minuta. Nëse një dhëmb i përhershëm ka dalë i tëri, MOS e fërkoni — mbajeni në qumësht ose në pështymën e vetë personit dhe shkoni te dentisti brenda pak orësh; ndonjëherë shpëtohet."),
+     "WARNING: Mouth bleeding: bite firmly on a clean folded cloth for 15 minutes. If a permanent tooth came out whole, do NOT scrub it - keep it in milk or in the person's own saliva and see a dentist within a few hours; it can sometimes be saved.",
+     "KUJDES: Gjakderdhje nga goja: kafshoni fort një leckë të pastër të palosur për 15 minuta. Nëse një dhëmb i përhershëm ka dalë i tëri, MOS e fërkoni - mbajeni në qumësht ose në pështymën e vetë personit dhe shkoni te dentisti brenda pak orësh; ndonjëherë shpëtohet."),
 
     ("rehydration",
      r"diarrh|rehydration|\bors\b|dehydrat|vomit(ing)? (all day|for hours|constantly)|food poisoning|(vomit|sick|throwing up).{0,30}after (eating|food|the meal)",
@@ -98,8 +98,8 @@ RULES = [
     ("heatstroke",
      r"heat ?stroke|collapsed.{0,30}(sun|heat)|(sun|heat).{0,35}collapsed|skin.{0,20}hot and dry|hot and dry skin|not sweating|stopped sweating|(sun|heat|hot).{0,45}(dizzy|not sweat)|(left|forgot|locked|stuck).{0,28}(car|vehicle)|hot car",
      r"goditje nga (nxeht[ëe]sia|dielli)|i ra t[ëe] fik[ëe]t nga (dielli|vapa)|l[ëe]kur[ëae].{0,20}(nxeht[ëe]|e that[ëe])|nuk djersit|(u )?nxeh\w*.{0,30}diell|diell\w*.{0,35}(rrotull|marramendje|t[ëe] fik[ëe]t)|vap[ëae]?\w*.{0,30}(rrotull|marramendje|t[ëe] fik[ëe]t)|(harru\w*|mbyll\w*|ngec\w*).{0,28}(makin[ëe]|vetur[ëe])|makin[ëe]\w*.{0,18}(diell|vap[ëe])|pika e diellit",
-     "WARNING: Hot dry skin after collapsing in heat = heat stroke. Cool them FAST: shade, remove extra clothing, wet cloths and fanning. Give sips of water ONLY if they are fully awake and can swallow — never if drowsy or confused.",
-     "KUJDES: Lëkurë e nxehtë e thatë pas rrëzimit në vapë = goditje nga nxehtësia. Ftohe SHPEJT: hije, hiqi rrobat e tepërta, lecka të lagura dhe fresk. Jepi gllënjka ujë VETËM nëse është plotësisht zgjuar dhe gëlltit dot — kurrë nëse është i përgjumur a i hutuar."),
+     "WARNING: Hot dry skin after collapsing in heat = heat stroke. Cool them FAST: shade, remove extra clothing, wet cloths and fanning. Give sips of water ONLY if they are fully awake and can swallow - never if drowsy or confused.",
+     "KUJDES: Lëkurë e nxehtë e thatë pas rrëzimit në vapë = goditje nga nxehtësia. Ftohe SHPEJT: hije, hiqi rrobat e tepërta, lecka të lagura dhe fresk. Jepi gllënjka ujë VETËM nëse është plotësisht zgjuar dhe gëlltit dot - kurrë nëse është i përgjumur a i hutuar."),
 
     ("seizure",
      r"seizure|convuls|(is )?shaking all over|fit\b|epilep|krize.{0,15}dridh|foam(ing)? (at|in) (the |his |her )?mouth|trembling all over",
@@ -110,26 +110,26 @@ RULES = [
     ("electrical",
      r"electric(al)? (shock|burn|current|wire)|electrocut|power line|got shocked|(caught|grabbed|holding|stuck).{0,30}(live )?wire|current (caught|got|grabbed)",
      r"rrym[ëae] elektrike|goditje elektrike|elektrizua|kabllo elektrike|korr?ent\w*|e kapi rryma|i kapur pas telit|tel\w* elektrik",
-     "WARNING: Electricity — before touching anyone still in contact with the source, CUT THE POWER or push the wire away with dry wood or plastic, never with bare hands. Electrical burns can be deep inside even when the skin looks minor: medical check is needed. If they are unresponsive and not breathing, start CPR.",
-     "KUJDES: Rryma elektrike — para se të prekësh dikë që është ende në kontakt me burimin, NDËRPRIT RRYMËN ose largoje kabllon me dru a plastikë të thatë, kurrë me duar të zhveshura. Djegiet elektrike mund të jenë të thella brenda edhe kur lëkura duket mirë: duhet kontroll mjekësor. Nëse s'përgjigjet dhe nuk merr frymë, fillo CPR."),
+     "WARNING: Electricity - before touching anyone still in contact with the source, CUT THE POWER or push the wire away with dry wood or plastic, never with bare hands. Electrical burns can be deep inside even when the skin looks minor: medical check is needed. If they are unresponsive and not breathing, start CPR.",
+     "KUJDES: Rryma elektrike - para se të prekësh dikë që është ende në kontakt me burimin, NDËRPRIT RRYMËN ose largoje kabllon me dru a plastikë të thatë, kurrë me duar të zhveshura. Djegiet elektrike mund të jenë të thella brenda edhe kur lëkura duket mirë: duhet kontroll mjekësor. Nëse s'përgjigjet dhe nuk merr frymë, fillo CPR."),
 
     ("diabetic",
      r"diabet\w*.{0,50}(dizzy|faint|confus|shak|sweat|weak|unconscious)|low blood sugar|hypoglyc",
      r"diabet\w*.{0,50}(marramendje|t[ëe] fik[ëe]t|hutuar|djers|dridh|dob[ëe]t)|sheqeri i ul[ëe]t",
-     "WARNING: A diabetic who is dizzy, shaky, sweaty or confused may have LOW blood sugar. If they are awake and can swallow, give sugar NOW — sugar, honey, juice or candy — and repeat in 10 minutes if not better. NEVER give anything by mouth if unconscious; get emergency help.",
-     "KUJDES: Një diabetik me marramendje, dridhje, djersë a hutim mund të ketë sheqer TË ULËT. Nëse është zgjuar dhe gëlltit dot, jepi sheqer TANI — sheqer, mjaltë, lëng frutash a karamele — dhe përsërite pas 10 minutash nëse s'përmirësohet. KURRË asgjë nga goja nëse është pa vetëdije; kërko ndihmë urgjente."),
+     "WARNING: A diabetic who is dizzy, shaky, sweaty or confused may have LOW blood sugar. If they are awake and can swallow, give sugar NOW - sugar, honey, juice or candy - and repeat in 10 minutes if not better. NEVER give anything by mouth if unconscious; get emergency help.",
+     "KUJDES: Një diabetik me marramendje, dridhje, djersë a hutim mund të ketë sheqer TË ULËT. Nëse është zgjuar dhe gëlltit dot, jepi sheqer TANI - sheqer, mjaltë, lëng frutash a karamele - dhe përsërite pas 10 minutash nëse s'përmirësohet. KURRË asgjë nga goja nëse është pa vetëdije; kërko ndihmë urgjente."),
 
     ("animal-bite",
      r"(dog|cat|animal|bat|fox).{0,25}bit|bitten by.{0,20}(a |the )?(dog|cat|animal|bat|fox)",
      r"kafshuar\w*.{0,25}(qen|mace|kafsh[ëe])|(qen\w*|mace\w*|kafsh[ëe]\w*).{0,30}kafshu",
-     "WARNING: Animal bite — wash the wound RIGHT NOW with soap and running water for 15 minutes. Do not close it tightly. There is rabies and tetanus risk: see a health worker as soon as possible, even if the wound looks small.",
-     "KUJDES: Kafshim kafshe — laje plagën TANI me sapun dhe ujë të rrjedhshëm për 15 minuta. Mos e mbyll fort. Ka rrezik tërbimi dhe tetanozi: shko te mjeku sa më shpejt, edhe nëse plaga duket e vogël."),
+     "WARNING: Animal bite - wash the wound RIGHT NOW with soap and running water for 15 minutes. Do not close it tightly. There is rabies and tetanus risk: see a health worker as soon as possible, even if the wound looks small.",
+     "KUJDES: Kafshim kafshe - laje plagën TANI me sapun dhe ujë të rrjedhshëm për 15 minuta. Mos e mbyll fort. Ka rrezik tërbimi dhe tetanozi: shko te mjeku sa më shpejt, edhe nëse plaga duket e vogël."),
 
     ("choking",
      r"choking|food (stuck|lodged).{0,15}(throat|windpipe)|can'?t breathe.{0,25}food|something stuck.{0,15}throat",
      r"(po )?mbytet (me|nga) ushqim|ka ngecur ushqimi|i z[ëe] fryma nga ushqimi",
-     "WARNING: If they are coughing hard or can speak: do NOT interfere — encourage them to keep coughing until it clears. Only if they CANNOT breathe, speak or cough: give up to 5 firm blows between the shoulder blades with the heel of your hand, then up to 5 abdominal thrusts (fist above the navel, pull sharply in and up). Alternate 5 and 5 until it clears. If they become unresponsive, start CPR.",
-     "KUJDES: Nëse kollitet fort ose flet dot: MOS ndërhy — nxite të kollitet vetë derisa të dalë. VETËM nëse nuk merr dot frymë, nuk flet dot dhe nuk kollitet dot: jepi deri në 5 goditje të forta mes shpatullave me fund të shuplakës, pastaj deri në 5 shtytje barku (grushti mbi kërthizë, tërhiq fort brenda e lart). Alterno 5 e 5 derisa të dalë. Nëse humb vetëdijen, fillo CPR."),
+     "WARNING: If they are coughing hard or can speak: do NOT interfere - encourage them to keep coughing until it clears. Only if they CANNOT breathe, speak or cough: give up to 5 firm blows between the shoulder blades with the heel of your hand, then up to 5 abdominal thrusts (fist above the navel, pull sharply in and up). Alternate 5 and 5 until it clears. If they become unresponsive, start CPR.",
+     "KUJDES: Nëse kollitet fort ose flet dot: MOS ndërhy - nxite të kollitet vetë derisa të dalë. VETËM nëse nuk merr dot frymë, nuk flet dot dhe nuk kollitet dot: jepi deri në 5 goditje të forta mes shpatullave me fund të shuplakës, pastaj deri në 5 shtytje barku (grushti mbi kërthizë, tërhiq fort brenda e lart). Alterno 5 e 5 derisa të dalë. Nëse humb vetëdijen, fillo CPR."),
 
     ("stroke",
      r"stroke|face.{0,25}(droop|crooked|twisted)|(droop|crooked|twisted).{0,25}(face|mouth)|can'?t (move|lift).{0,20}arm.{0,50}(mouth|face|speech)|slurred speech",
@@ -140,8 +140,8 @@ RULES = [
     ("fracture",
      r"broken (arm|leg|bone|wrist|ankle|hand|foot)|fracture|\bbroke (his|her|my|their) (arm|leg|wrist|ankle|hand|foot)|bone.{0,22}(came|sticking|coming|is) out|bone.{0,20}(protrud|expos|visible)|open fracture|crush\w*|caught in.{0,20}(press|machine|door)",
      r"thyer (krahun|k[ëe]mb[ëe]n|dor[ëe]n|kock[ëe]n|kyçin)|ka thyer|thyerje|vith\w*.{0,25}(dhemb|dhimbje|thye)|(dhemb|dhimbje).{0,20}vith\w*|(u rr[ëe]zua|ra).{0,35}nuk ngrihet dot|kock[ëe]?\w*.{0,25}(dal[ëe]|del|doli|jasht[ëe])|(doli|ka dal[ëe]).{0,22}kock|(z[ëe]n[ëe]|zuri).{0,25}(dor[ëe]n?|k[ëe]mb[ëe]n?|gisht)|pres[ëae]\w*.{0,20}shtyp|krejt t[ëe] shtypur",
-     "WARNING: Keep the broken limb completely still. Splint it against something rigid and padded, wrapped firmly but not tight. Do NOT try to straighten the bone. A proper cast from medical care is needed — a bandage alone is not a treatment.",
-     "KUJDES: Mbaje gjymtyrën e thyer krejt të palëvizur. Vendosi shinë me diçka të fortë e të mbushur, lidhur fort por jo shtrënguar. MOS u përpiq ta drejtosh kockën. Duhet allçi nga mjeku — vetëm fasha nuk e shëron."),
+     "WARNING: Keep the broken limb completely still. Splint it against something rigid and padded, wrapped firmly but not tight. Do NOT try to straighten the bone. A proper cast from medical care is needed - a bandage alone is not a treatment.",
+     "KUJDES: Mbaje gjymtyrën e thyer krejt të palëvizur. Vendosi shinë me diçka të fortë e të mbushur, lidhur fort por jo shtrënguar. MOS u përpiq ta drejtosh kockën. Duhet allçi nga mjeku - vetëm fasha nuk e shëron."),
 
     ("heart-attack",
      r"chest pain|crushing.{0,25}chest|pain.{0,30}left arm|heart attack",
@@ -152,8 +152,8 @@ RULES = [
     ("bleeding",
      r"(bleeding|blood).{0,45}(won'?t|will not|does ?n'?t|not) stop(?!.{0,20}nose)|bleeding (heavily|badly|a lot|profusely)|losing (a lot of|so much) blood|blood (is )?(pouring|gushing|spurting)",
      r"(rrjedh|del|humb|po (m[ëe] )?ik[ëe]n).{0,20}(shum[ëe] )?gjak(?!\w*.{0,6}nga hund)|gjakderdhje e (r[ëe]nd[ëe]|madhe)|gjaku (nuk|s'?) ?(po )?ndalon|(nuk|s'?) ?(po )?ndalon gjaku",
-     "WARNING: For heavy bleeding from a wound: press hard DIRECTLY on the wound with a clean cloth NOW and do not let go. If blood soaks through, add more cloth on top — do NOT remove the soaked one. Raise the limb if possible. Keep pressing without pause until help arrives.",
-     "KUJDES: Për gjakderdhje të madhe nga një plagë: shtyp fort DREJTPËRDREJT mbi plagë me një leckë të pastër TANI dhe mos e lësho. Nëse gjaku depërton, shto leckë tjetër sipër — MOS e hiq të lagurën. Ngrije gjymtyrën lart nëse mundesh. Vazhdo shtypjen pa pushim derisa të vijë ndihma."),
+     "WARNING: For heavy bleeding from a wound: press hard DIRECTLY on the wound with a clean cloth NOW and do not let go. If blood soaks through, add more cloth on top - do NOT remove the soaked one. Raise the limb if possible. Keep pressing without pause until help arrives.",
+     "KUJDES: Për gjakderdhje të madhe nga një plagë: shtyp fort DREJTPËRDREJT mbi plagë me një leckë të pastër TANI dhe mos e lësho. Nëse gjaku depërton, shto leckë tjetër sipër - MOS e hiq të lagurën. Ngrije gjymtyrën lart nëse mundesh. Vazhdo shtypjen pa pushim derisa të vijë ndihma."),
 
     ("hypothermia",
      r"hypotherm|shiver\w*.{0,30}(cold|freez)|(freezing|ice.?cold).{0,30}(shiver|trembl|confus)|found.{0,25}(freezing|ice.?cold)|frostbit|frozen (toes|fingers|feet|hands)|(toes|fingers).{0,25}(white|frozen|numb)",
@@ -164,20 +164,20 @@ RULES = [
     ("head-injury",
      r"(hit|bump|blow|blood|bleeding|wound|fell|crash).{0,30}head|head.{0,25}(bleed|blood|bump|lump|wound|injur)",
      r"(gjak|goditje|gung[ëe]|l[ëe]ndim|plag[ëe]).{0,25}kok[ëe]|kok[ëe]n?.{0,25}(gjak|goditj|gung[ëe]|plag[ëe])|(ra|u rr[ëe]zua).{0,35}(gjak nga koka|n[ëe] kok[ëe])|(ra|u rr[ëe]zua).{0,45}(po vjell|p[ëe]rgjum\w*|nuk mban syt[ëe])|ra (nga|n[ëe]) shkall\w*",
-     "WARNING: Head wound: press gently on the bleeding with a clean cloth — do NOT press hard if the skull may be damaged. Keep them resting with head and shoulders slightly raised. Nothing to eat or drink. If the fall was violent, keep the neck still. Get urgent help if there is vomiting, confusion, unequal pupils, worsening drowsiness, or clear fluid from the nose or ears.",
-     "KUJDES: Plagë në kokë: shtyp butë mbi gjakderdhjen me leckë të pastër — MOS shtyp fort nëse kafka mund të jetë dëmtuar. Mbaje shtrirë me kokën e supet pak të ngritura. Asgjë për të ngrënë a pirë. Nëse rrëzimi ishte i fortë, mbaje qafën të palëvizur. Kërko ndihmë urgjente nëse ka të vjella, hutim, bebëza të pabarabarta, përgjumje në rritje, ose lëng i kthjellët nga hunda a veshët."),
+     "WARNING: Head wound: press gently on the bleeding with a clean cloth - do NOT press hard if the skull may be damaged. Keep them resting with head and shoulders slightly raised. Nothing to eat or drink. If the fall was violent, keep the neck still. Get urgent help if there is vomiting, confusion, unequal pupils, worsening drowsiness, or clear fluid from the nose or ears.",
+     "KUJDES: Plagë në kokë: shtyp butë mbi gjakderdhjen me leckë të pastër - MOS shtyp fort nëse kafka mund të jetë dëmtuar. Mbaje shtrirë me kokën e supet pak të ngritura. Asgjë për të ngrënë a pirë. Nëse rrëzimi ishte i fortë, mbaje qafën të palëvizur. Kërko ndihmë urgjente nëse ka të vjella, hutim, bebëza të pabarabarta, përgjumje në rritje, ose lëng i kthjellët nga hunda a veshët."),
 
     ("chemical-eye",
      r"(bleach|chemical|acid|detergent|cleaner|lime|cement).{0,30}(in|into|splashed|got).{0,12}eye|eye.{0,25}(bleach|chemical|acid)|splashed.{0,20}eye",
      r"sp[ëe]rkat\w*.{0,25}sy|(zbardhues|kimikat|acid\w*|detergjent|g[ëe]lqere).{0,28}sy|sy\w*.{0,22}(zbardhues|kimikat|acid)",
-     "WARNING: Chemical in the eye — flush NOW with clean water, continuously, for at least 20 minutes: hold the eyelid open and pour from the nose side outward so it does not run into the other eye. Remove contact lenses. Do NOT rub. Then urgent medical care.",
-     "KUJDES: Kimikat në sy — shpëlaje TANI me ujë të pastër, pa ndërprerje, të paktën 20 minuta: mbaje kapakun hapur dhe derdh nga ana e hundës nga jashtë, që të mos i shkojë syrit tjetër. Hiq lentet e kontaktit. MOS e fërko. Pastaj kujdes mjekësor urgjent."),
+     "WARNING: Chemical in the eye - flush NOW with clean water, continuously, for at least 20 minutes: hold the eyelid open and pour from the nose side outward so it does not run into the other eye. Remove contact lenses. Do NOT rub. Then urgent medical care.",
+     "KUJDES: Kimikat në sy - shpëlaje TANI me ujë të pastër, pa ndërprerje, të paktën 20 minuta: mbaje kapakun hapur dhe derdh nga ana e hundës nga jashtë, që të mos i shkojë syrit tjetër. Hiq lentet e kontaktit. MOS e fërko. Pastaj kujdes mjekësor urgjent."),
 
     ("asthma",
      r"asthma.{0,45}(attack|can'?t breathe|inhaler)|inhaler.{0,25}(empty|ran out|finished|lost|no more)|no inhaler",
      r"astm[ëe]?\w*.{0,45}(pomp[ëae]|frym|nuk merr)|pomp[ëae].{0,25}(mbaruar|bosh|humbur)",
-     "WARNING: Asthma attack with no working inhaler: sit them upright, leaning slightly forward — do not lay them down. Keep them calm with slow, steady breaths. Get emergency help NOW if lips or face turn bluish, they cannot speak full sentences, or it is not easing.",
-     "KUJDES: Krizë astme pa pompë: mbaje ulur drejt, pak të përkulur përpara — mos e shtri. Qetësoje, me frymëmarrje të ngadalta e të njëtrajtshme. Kërko ndihmë urgjente TANI nëse buzët a fytyra i mavijosen, nuk flet dot fjali të plota, ose nuk po i lehtësohet."),
+     "WARNING: Asthma attack with no working inhaler: sit them upright, leaning slightly forward - do not lay them down. Keep them calm with slow, steady breaths. Get emergency help NOW if lips or face turn bluish, they cannot speak full sentences, or it is not easing.",
+     "KUJDES: Krizë astme pa pompë: mbaje ulur drejt, pak të përkulur përpara - mos e shtri. Qetësoje, me frymëmarrje të ngadalta e të njëtrajtshme. Kërko ndihmë urgjente TANI nëse buzët a fytyra i mavijosen, nuk flet dot fjali të plota, ose nuk po i lehtësohet."),
 
     ("carbon-monoxide",
      r"(headache|dizzy|drowsy|nauseous).{0,50}(stove|heater|brazier|generator|chimney|charcoal)|(stove|heater|brazier|generator|charcoal).{0,50}(headache|dizzy|drowsy)|carbon monoxide",
@@ -188,14 +188,14 @@ RULES = [
     ("nose-object",
      r"(object|bean|seed|pea|bead|something small|small object).{0,28}(in|up|into).{0,12}(nose|nostril)|(nose|nostril).{0,22}(object|bean|seed|bead)",
      r"(fut|hyr)\w*.{0,32}hund[ëe]|hund[ëe]\w*.{0,25}(send|objekt|kok[ëe]rr|fasule|far[ëe]|rruaz[ëe])|send.{0,28}hund[ëe]",
-     "WARNING: Object in the nose: have them breathe through the MOUTH and stay calm. Do NOT poke anything into the nostril — it pushes the object deeper. Press the empty nostril closed and have them blow out sharply through the blocked side a few times. If it does not come out, see a health worker. This is NOT choking — no back blows or belly thrusts unless they truly cannot breathe.",
-     "KUJDES: Send në hundë: le të marrë frymë me GOJË dhe qetësoje. MOS fut asgjë në vrimën e hundës — e shtyn më thellë. Mbylli me gisht vrimën e lirë dhe le të nxjerrë frymën fort disa herë nga ana e bllokuar. Nëse nuk del, shko te mjeku. Kjo NUK është mbytje me ushqim — pa goditje shpine e pa shtytje barku, veç nëse vërtet nuk merr dot frymë."),
+     "WARNING: Object in the nose: have them breathe through the MOUTH and stay calm. Do NOT poke anything into the nostril - it pushes the object deeper. Press the empty nostril closed and have them blow out sharply through the blocked side a few times. If it does not come out, see a health worker. This is NOT choking - no back blows or belly thrusts unless they truly cannot breathe.",
+     "KUJDES: Send në hundë: le të marrë frymë me GOJË dhe qetësoje. MOS fut asgjë në vrimën e hundës - e shtyn më thellë. Mbylli me gisht vrimën e lirë dhe le të nxjerrë frymën fort disa herë nga ana e bllokuar. Nëse nuk del, shko te mjeku. Kjo NUK është mbytje me ushqim - pa goditje shpine e pa shtytje barku, veç nëse vërtet nuk merr dot frymë."),
 
     ("amputation",
      r"(cut|sawed|chopped|sliced) off.{0,22}(finger|toe|hand|foot|arm|leg)|amputat|severed|(finger|toe|hand)s?.{0,15}(cut|chopped|sawed) off",
      r"(preu|prer[ëe]|k[ëe]puti?).{0,25}(gisht|dor[ëe]|k[ëe]mb[ëe]|krah)|sharra.{0,25}gisht|gisht\w*.{0,25}(prer[ëe]|k[ëe]put)|amputim",
-     "WARNING: Amputation: first stop the bleeding at the injury — press hard with a clean cloth; a tourniquet only if pressure is not enough. Wrap the severed part in clean, slightly moist cloth, seal it in a plastic bag, and put the BAG on cold water or ice — the part must never touch ice directly. Bring it with the person to the hospital NOW: hours matter.",
-     "KUJDES: Pjesë e prerë e trupit: në fillim ndal gjakderdhjen te plaga — shtyp fort me leckë të pastër; rrip shtrëngues vetëm nëse shtypja s'mjafton. Mbështille pjesën e prerë me leckë të pastër pak të njomë, mbylle në qese plastike dhe vëre QESEN mbi ujë të ftohtë a akull — pjesa të mos e prekë kurrë akullin direkt. Merre me vete në spital TANI: orët kanë rëndësi."),
+     "WARNING: Amputation: first stop the bleeding at the injury - press hard with a clean cloth; a tourniquet only if pressure is not enough. Wrap the severed part in clean, slightly moist cloth, seal it in a plastic bag, and put the BAG on cold water or ice - the part must never touch ice directly. Bring it with the person to the hospital NOW: hours matter.",
+     "KUJDES: Pjesë e prerë e trupit: në fillim ndal gjakderdhjen te plaga - shtyp fort me leckë të pastër; rrip shtrëngues vetëm nëse shtypja s'mjafton. Mbështille pjesën e prerë me leckë të pastër pak të njomë, mbylle në qese plastike dhe vëre QESEN mbi ujë të ftohtë a akull - pjesa të mos e prekë kurrë akullin direkt. Merre me vete në spital TANI: orët kanë rëndësi."),
 
     ("chest-wound",
      r"chest wound|wound.{0,25}chest|(sucking|whistling|hissing).{0,28}(chest|wound|breath)|(hole|stabbed).{0,20}chest",
@@ -206,68 +206,68 @@ RULES = [
     ("pregnancy-bleeding",
      r"pregnan\w*.{0,35}bleed|bleed\w*.{0,30}pregnan|vaginal bleeding",
      r"shtatz[ëe]n[ëae]?\w*.{0,35}(gjakderdhje|gjak)|gjakderdhje.{0,30}shtatz[ëe]n",
-     "WARNING: Bleeding in pregnancy is an emergency for mother and baby. Do NOT press on the belly and put nothing inside — an external pad only. Lay her on her LEFT side, keep her warm, nothing to eat or drink. Get her to medical care urgently and bring the soaked pads so staff can judge the blood loss.",
-     "KUJDES: Gjakderdhja në shtatzëni është urgjencë për nënën dhe foshnjën. MOS e shtyp barkun dhe mos fut asgjë brenda — vetëm pecetë të jashtme. Shtrije në krahun e MAJTË, mbaje ngrohtë, asgjë për të ngrënë a pirë. Çoje urgjentisht te mjeku dhe merrni pecetat e njomura, që mjekët të vlerësojnë humbjen e gjakut."),
+     "WARNING: Bleeding in pregnancy is an emergency for mother and baby. Do NOT press on the belly and put nothing inside - an external pad only. Lay her on her LEFT side, keep her warm, nothing to eat or drink. Get her to medical care urgently and bring the soaked pads so staff can judge the blood loss.",
+     "KUJDES: Gjakderdhja në shtatzëni është urgjencë për nënën dhe foshnjën. MOS e shtyp barkun dhe mos fut asgjë brenda - vetëm pecetë të jashtme. Shtrije në krahun e MAJTË, mbaje ngrohtë, asgjë për të ngrënë a pirë. Çoje urgjentisht te mjeku dhe merrni pecetat e njomura, që mjekët të vlerësojnë humbjen e gjakut."),
 
     ("infant-sick",
      r"(baby|infant|newborn).{0,35}(diarrh|vomit|fever)|\d ?-?(week|month)s?.?.?old.{0,30}(diarrh|vomit|fever)",
      r"foshnj\w*.{0,35}(diarre|vjell|ethe|temperatur)|(muajsh\w*|javsh\w*).{0,28}(diarre|vjell|ethe)",
-     "WARNING: A baby under 6 months with diarrhea, vomiting or fever can become dangerously dehydrated within HOURS — see a health worker TODAY. Keep breastfeeding often and give the rehydration drink in small sips between feeds. Danger signs needing help NOW: sunken eyes or sunken soft spot, dry mouth, no wet diapers, unusual sleepiness.",
-     "KUJDES: Foshnja nën 6 muajsh me diarre, të vjella a ethe mund të dehidratohet rrezikshëm brenda ORËSH — çojeni te mjeku SOT. Vazhdoni gjidhënien shpesh dhe jepini pijen rehidruese me gllënjka të vogla mes gjireve. Shenja rreziku që duan ndihmë TANI: sy të futur a vend i butë i futur, gojë e thatë, pa pelena të lagura, përgjumje e pazakontë."),
+     "WARNING: A baby under 6 months with diarrhea, vomiting or fever can become dangerously dehydrated within HOURS - see a health worker TODAY. Keep breastfeeding often and give the rehydration drink in small sips between feeds. Danger signs needing help NOW: sunken eyes or sunken soft spot, dry mouth, no wet diapers, unusual sleepiness.",
+     "KUJDES: Foshnja nën 6 muajsh me diarre, të vjella a ethe mund të dehidratohet rrezikshëm brenda ORËSH - çojeni te mjeku SOT. Vazhdoni gjidhënien shpesh dhe jepini pijen rehidruese me gllënjka të vogla mes gjireve. Shenja rreziku që duan ndihmë TANI: sy të futur a vend i butë i futur, gojë e thatë, pa pelena të lagura, përgjumje e pazakontë."),
 
     ("testicle-pain",
      r"testic\w*.{0,30}pain|pain\w*.{0,30}testic|scrotum.{0,25}(pain|swoll)",
      r"dhimbje.{0,30}herdh\w*|dhemb\w*.{0,25}herdh\w*|herdh\w*.{0,30}(dhimbje|dhemb|enjtur)",
-     "WARNING: Sudden severe testicle pain can be torsion — the blood supply is cut off. This is a surgical emergency: get to a hospital NOW; the testicle can usually be saved only within about 6 hours. Go even if the pain eases. Nothing to eat or drink on the way.",
-     "KUJDES: Dhimbja e fortë e papritur e herdheve mund të jetë përdredhje — i pritet gjaku. Është urgjencë kirurgjikale: shko në spital TANI; herdha shpëtohet zakonisht vetëm brenda rreth 6 orësh. Shko edhe nëse dhimbja qetësohet. Asgjë për të ngrënë a pirë rrugës."),
+     "WARNING: Sudden severe testicle pain can be torsion - the blood supply is cut off. This is a surgical emergency: get to a hospital NOW; the testicle can usually be saved only within about 6 hours. Go even if the pain eases. Nothing to eat or drink on the way.",
+     "KUJDES: Dhimbja e fortë e papritur e herdheve mund të jetë përdredhje - i pritet gjaku. Është urgjencë kirurgjikale: shko në spital TANI; herdha shpëtohet zakonisht vetëm brenda rreth 6 orësh. Shko edhe nëse dhimbja qetësohet. Asgjë për të ngrënë a pirë rrugës."),
 
     ("hanging",
      r"hang(ed|ing)?.{0,28}(rope|neck|noose|himself|herself|themselves)|found.{0,22}hanging|strangl",
      r"t[ëe] varur.{0,28}(litar|tavan)|varur n[ëe] litar|var\w* veten|litar\w*.{0,22}qaf[ëe]",
-     "WARNING: Hanging: lift and support the body IMMEDIATELY to take the weight off the neck — call others to help. Cut well above the knot; do not waste time untying it. Once down: loosen everything around the neck; if they are not breathing start CPR; keep the neck as still as possible. Get emergency help and do not leave the person alone.",
-     "KUJDES: Varje: ngrije dhe mbaje trupin MENJËHERË që pesha të mos rëndojë në qafë — thirr të tjerë në ndihmë. Prite litarin mbi nyjë; mos humb kohë duke e zgjidhur. Sapo të ulet: liro gjithçka rreth qafës; nëse nuk merr frymë fillo CPR; mbaje qafën sa më të palëvizur. Kërko ndihmë urgjente dhe mos e lër vetëm."),
+     "WARNING: Hanging: lift and support the body IMMEDIATELY to take the weight off the neck - call others to help. Cut well above the knot; do not waste time untying it. Once down: loosen everything around the neck; if they are not breathing start CPR; keep the neck as still as possible. Get emergency help and do not leave the person alone.",
+     "KUJDES: Varje: ngrije dhe mbaje trupin MENJËHERË që pesha të mos rëndojë në qafë - thirr të tjerë në ndihmë. Prite litarin mbi nyjë; mos humb kohë duke e zgjidhur. Sapo të ulet: liro gjithçka rreth qafës; nëse nuk merr frymë fillo CPR; mbaje qafën sa më të palëvizur. Kërko ndihmë urgjente dhe mos e lër vetëm."),
 
     ("fishbone",
      r"fish ?bone.{0,22}(throat|stuck)|bone.{0,15}stuck.{0,15}throat|pill.{0,20}stuck|stuck pill|tablet.{0,15}stuck",
      r"hal[ëe]\w?.{0,20}(peshku|fyt|ngecur)|ngecur.{0,20}hal[ëe]|ila[çc]\w{0,3}.{0,20}ngec|ngeci ila[çc]\w*",
-     "WARNING: A fish bone, pill or other object stuck in the throat of someone who can breathe and talk is NOT choking — no belly thrusts. Try a few sips of water or a bite of soft bread. Do NOT poke fingers or objects down the throat. If it does not pass, or pain, drooling or trouble swallowing grows, see a health worker. Emergency only if breathing stops.",
-     "KUJDES: Halë peshku, ilaç a send tjetër i ngecur në fyt te dikush që merr frymë e flet NUK është mbytje — pa shtytje barku. Provo pak gllënjka ujë ose një kafshatë bukë të butë. MOS fut gishta a sende në fyt. Nëse nuk kalon, ose shtohet dhimbja, jargët a vështirësia në gëlltitje, shko te mjeku. Urgjencë vetëm nëse i ndalet fryma."),
+     "WARNING: A fish bone, pill or other object stuck in the throat of someone who can breathe and talk is NOT choking - no belly thrusts. Try a few sips of water or a bite of soft bread. Do NOT poke fingers or objects down the throat. If it does not pass, or pain, drooling or trouble swallowing grows, see a health worker. Emergency only if breathing stops.",
+     "KUJDES: Halë peshku, ilaç a send tjetër i ngecur në fyt te dikush që merr frymë e flet NUK është mbytje - pa shtytje barku. Provo pak gllënjka ujë ose një kafshatë bukë të butë. MOS fut gishta a sende në fyt. Nëse nuk kalon, ose shtohet dhimbja, jargët a vështirësia në gëlltitje, shko te mjeku. Urgjencë vetëm nëse i ndalet fryma."),
 
     ("rusty-nail",
      r"(stepped|trod|stood).{0,18}(rusty )?nail|rusty nail|puncture wound|needle.{0,18}(stuck|in my|pierced|went into)",
      r"gozhd[ëe]\w*.{0,25}ndryshkur|shkeli n[ëe] gozhd[ëe]|gozhd[ëe] t[ëe] ndryshkur|gjilp[ëe]r[ëae]?\w*.{0,25}(dor[ëe]|gisht|k[ëe]mb[ëe]|hyri|shkoi)",
-     "WARNING: A puncture from a rusty nail: wash it thoroughly for 15 minutes with soap and running water — let it bleed a little first. Cover it loosely. Deep dirty punctures carry TETANUS risk: see a health worker within 48 hours about a tetanus shot. Watch for spreading redness, warmth, pus or fever.",
-     "KUJDES: Shpim nga gozhdë e ndryshkur: laje mirë 15 minuta me sapun e ujë të rrjedhshëm — lëre në fillim të kullojë pak gjak. Mbuloje lirshëm. Shpimet e thella të pista kanë rrezik TETANOZI: shko te mjeku brenda 48 orësh për vaksinën. Vëzhgo skuqje që zgjerohet, nxehtësi, qelb a ethe."),
+     "WARNING: A puncture from a rusty nail: wash it thoroughly for 15 minutes with soap and running water - let it bleed a little first. Cover it loosely. Deep dirty punctures carry TETANUS risk: see a health worker within 48 hours about a tetanus shot. Watch for spreading redness, warmth, pus or fever.",
+     "KUJDES: Shpim nga gozhdë e ndryshkur: laje mirë 15 minuta me sapun e ujë të rrjedhshëm - lëre në fillim të kullojë pak gjak. Mbuloje lirshëm. Shpimet e thella të pista kanë rrezik TETANOZI: shko te mjeku brenda 48 orësh për vaksinën. Vëzhgo skuqje që zgjerohet, nxehtësi, qelb a ethe."),
 
     ("stuck-ring",
      r"ring.{0,22}(stuck|swell|won'?t come)|(stuck|tight) ring",
      r"unaz[ëae].{0,25}(ngecur|gisht|shtr[ëe]nguar)|gisht\w*.{0,22}unaz[ëae]",
-     "WARNING: Ring stuck on a swelling finger: cool the hand in cold water and keep it raised to shrink the swelling, then use soap or oil and twist the ring off gently. Do NOT force it. If the finger turns cold, blue or numb, or the ring will not come off, get to a health worker urgently — a tight ring can cut off the blood supply.",
-     "KUJDES: Unazë e ngecur në gisht që po enjtet: ftohe dorën në ujë të ftohtë dhe mbaje lart që të ulet ënjtja, pastaj sapun a vaj dhe rrotulloje unazën butë. MOS e forco. Nëse gishti ftohet, mavijoset a mpihet, ose unaza s'del, shko urgjent te mjeku — unaza e shtrënguar e pret gjakun."),
+     "WARNING: Ring stuck on a swelling finger: cool the hand in cold water and keep it raised to shrink the swelling, then use soap or oil and twist the ring off gently. Do NOT force it. If the finger turns cold, blue or numb, or the ring will not come off, get to a health worker urgently - a tight ring can cut off the blood supply.",
+     "KUJDES: Unazë e ngecur në gisht që po enjtet: ftohe dorën në ujë të ftohtë dhe mbaje lart që të ulet ënjtja, pastaj sapun a vaj dhe rrotulloje unazën butë. MOS e forco. Nëse gishti ftohet, mavijoset a mpihet, ose unaza s'del, shko urgjent te mjeku - unaza e shtrënguar e pret gjakun."),
 
     ("leech",
      r"\bleech",
      r"shushunj\w*",
-     "WARNING: Leech: slide a fingernail (or a flat card) under its mouth and push it off sideways — do NOT burn it, salt it, or rip it off; that makes it spit into the wound. Wash with soap and water. It may bleed for a while — that is normal. Cover it and watch for infection.",
-     "KUJDES: Shushunja: fut thoin (a një kartë të hollë) nën gojën e saj dhe shtyje anash — MOS e djeg, mos i hidh kripë dhe mos e shkul me forcë, se villet në plagë. Laje me sapun e ujë. Mund të rrjedhë gjak për ca kohë — është normale. Mbuloje dhe vëzhgo për infeksion."),
+     "WARNING: Leech: slide a fingernail (or a flat card) under its mouth and push it off sideways - do NOT burn it, salt it, or rip it off; that makes it spit into the wound. Wash with soap and water. It may bleed for a while - that is normal. Cover it and watch for infection.",
+     "KUJDES: Shushunja: fut thoin (a një kartë të hollë) nën gojën e saj dhe shtyje anash - MOS e djeg, mos i hidh kripë dhe mos e shkul me forcë, se villet në plagë. Laje me sapun e ujë. Mund të rrjedhë gjak për ca kohë - është normale. Mbuloje dhe vëzhgo për infeksion."),
 
     ("mushroom",
      r"(ate|eaten|had).{0,22}(wild )?mushroom|mushroom.{0,15}poison",
      r"k[ëe]rpudha\w*.{0,25}(egra|helm)|h[ëe]ngri k[ëe]rpudha",
-     "WARNING: Wild mushroom poisoning can be DEADLY even if symptoms fade — with the most dangerous mushrooms people feel better for hours while the liver is failing. Get to hospital NOW; do not wait to see if it passes. Do NOT make them vomit. Bring a sample or a photo of the mushroom.",
-     "KUJDES: Helmimi nga kërpudhat e egra mund të jetë VDEKJEPRURËS edhe nëse shenjat qetësohen — me kërpudhat më të rrezikshme njeriu ndihet më mirë për orë të tëra ndërsa mëlçia po dëmtohet. Shko në spital TANI; mos prit të shohësh nëse kalon. MOS e bëj të vjellë. Merr me vete një copë a një foto të kërpudhës."),
+     "WARNING: Wild mushroom poisoning can be DEADLY even if symptoms fade - with the most dangerous mushrooms people feel better for hours while the liver is failing. Get to hospital NOW; do not wait to see if it passes. Do NOT make them vomit. Bring a sample or a photo of the mushroom.",
+     "KUJDES: Helmimi nga kërpudhat e egra mund të jetë VDEKJEPRURËS edhe nëse shenjat qetësohen - me kërpudhat më të rrezikshme njeriu ndihet më mirë për orë të tëra ndërsa mëlçia po dëmtohet. Shko në spital TANI; mos prit të shohësh nëse kalon. MOS e bëj të vjellë. Merr me vete një copë a një foto të kërpudhës."),
 
     ("ear-insect",
      r"insect.{0,18}ear|(fly|bug|beetle).{0,15}(in|into).{0,10}ear|ear.{0,20}(insect|fly|bug|buzz)",
      r"(insekt|miz[ëe]|mush\w*|buburrec).{0,25}vesh|vesh\w*.{0,25}(insekt|miz[ëe]|zhurm[ëe]|buburrec)",
-     "WARNING: Insect in the ear: tilt the head so that ear faces UP and pour in a little lukewarm water or clean oil — the insect floats up and out. Do NOT poke anything into the ear canal. If it does not come out, or pain or bleeding starts, see a health worker. It is not life-threatening.",
-     "KUJDES: Insekt në vesh: ktheje kokën me atë vesh LART dhe hidh brenda pak ujë të vakët a vaj të pastër — insekti noton e del. MOS fut asgjë në kanalin e veshit. Nëse nuk del, ose nis dhimbje a gjakderdhje, shko te mjeku. Nuk është rrezik për jetën."),
+     "WARNING: Insect in the ear: tilt the head so that ear faces UP and pour in a little lukewarm water or clean oil - the insect floats up and out. Do NOT poke anything into the ear canal. If it does not come out, or pain or bleeding starts, see a health worker. It is not life-threatening.",
+     "KUJDES: Insekt në vesh: ktheje kokën me atë vesh LART dhe hidh brenda pak ujë të vakët a vaj të pastër - insekti noton e del. MOS fut asgjë në kanalin e veshit. Nëse nuk del, ose nis dhimbje a gjakderdhje, shko te mjeku. Nuk është rrezik për jetën."),
 
     ("button-battery",
      r"(swallowed|ate|gulped).{0,22}(button |watch |coin |small round )?batter|batter\w*.{0,22}swallow",
      r"bateri\w*.{0,32}(g[ëe]lltit|h[ëe]ngr|piu|rrumbullak|or[ëe]s|sahati)|g[ëe]lltit\w*.{0,28}bateri",
-     "WARNING: A swallowed button battery is an EXTREME emergency — it burns through the food pipe within HOURS, even if the child seems completely fine. Go to hospital NOW, do not wait for symptoms. Nothing to eat or drink, do NOT make them vomit. At the hospital say clearly: 'swallowed a button battery' — it needs an X-ray immediately.",
-     "KUJDES: Bateria e vogël e rrumbullakët e gëlltitur është urgjencë EKSTREME — djeg gypin e ushqimit brenda ORËSH, edhe nëse fëmija duket krejt mirë. Shko në spital TANI, mos prit simptoma. Asgjë për të ngrënë a pirë, MOS e bëj të vjellë. Në spital thuaj qartë: 'ka gëlltitur bateri ore' — duhet radiografi menjëherë."),
+     "WARNING: A swallowed button battery is an EXTREME emergency - it burns through the food pipe within HOURS, even if the child seems completely fine. Go to hospital NOW, do not wait for symptoms. Nothing to eat or drink, do NOT make them vomit. At the hospital say clearly: 'swallowed a button battery' - it needs an X-ray immediately.",
+     "KUJDES: Bateria e vogël e rrumbullakët e gëlltitur është urgjencë EKSTREME - djeg gypin e ushqimit brenda ORËSH, edhe nëse fëmija duket krejt mirë. Shko në spital TANI, mos prit simptoma. Asgjë për të ngrënë a pirë, MOS e bëj të vjellë. Në spital thuaj qartë: 'ka gëlltitur bateri ore' - duhet radiografi menjëherë."),
 
     ("pregnancy-fall",
      r"pregnan\w*.{0,32}(fell|fall|hit|slipped|accident)|(fell|fall|slipped).{0,28}pregnan",
@@ -278,44 +278,44 @@ RULES = [
     ("wound-infection",
      r"wound.{0,32}(black|smell|stink|pus|rotten)|(blackened|foul.?smell\w*|rotting).{0,22}wound",
      r"plag[ëae]\w*.{0,32}(nxir[ëe]|e zez[ëe]|er[ëe] e keqe|qelb|kalbur)|(nxir[ëe]|er[ëe] e keqe|kalbur).{0,28}plag[ëae]",
-     "WARNING: A wound turning black with a foul smell is SEVERE infection — possibly gangrene, which kills if untreated. Get to a hospital TODAY. Keep the area at rest, cover it loosely. Do NOT bandage tightly and NEVER apply a tourniquet for an infection. Air bubbles under the skin or fast-spreading black edges = extreme emergency.",
-     "KUJDES: Plaga që nxihet dhe vjen erë e keqe është infeksion i RËNDË — mundësisht gangrenë, që të vret pa u trajtuar. Shko në spital SOT. Mbaje zonën në qetësi, mbuloje lirshëm. MOS e lidh fort dhe KURRË mos vendos rrip shtrëngues për infeksion. Flluska ajri nën lëkurë a zgjerim i shpejtë i të nxirës = urgjencë ekstreme."),
+     "WARNING: A wound turning black with a foul smell is SEVERE infection - possibly gangrene, which kills if untreated. Get to a hospital TODAY. Keep the area at rest, cover it loosely. Do NOT bandage tightly and NEVER apply a tourniquet for an infection. Air bubbles under the skin or fast-spreading black edges = extreme emergency.",
+     "KUJDES: Plaga që nxihet dhe vjen erë e keqe është infeksion i RËNDË - mundësisht gangrenë, që të vret pa u trajtuar. Shko në spital SOT. Mbaje zonën në qetësi, mbuloje lirshëm. MOS e lidh fort dhe KURRË mos vendos rrip shtrëngues për infeksion. Flluska ajri nën lëkurë a zgjerim i shpejtë i të nxirës = urgjencë ekstreme."),
 
     ("panic",
      r"panic attack|panick\w*|\bpanic\b|anxiety.{0,22}(breath|attack)",
      r"m[ëe] ka z[ëe]n[ëe] panik\w*|kam panik|atak panik\w*|panik\w*.{0,28}(frym|nuk marr)|ankth\w*.{0,28}(frym|zemra)",
-     "WARNING: A panic attack feels like you cannot breathe, but your body IS getting enough air. Sit down. Put one hand on your belly. Breathe in slowly through the nose counting to 4, out through the mouth counting to 6 — repeat for several minutes. It passes, usually within 20 minutes. Get medical help if there is chest pain spreading to the arm or jaw, or it does not ease.",
-     "KUJDES: Ataku i panikut të bën të ndihesh sikur s'merr dot frymë, por trupi PO merr ajër mjaftueshëm. Ulu. Vër njërën dorë mbi bark. Merr frymë ngadalë nga hunda duke numëruar deri në 4, nxirre nga goja duke numëruar deri në 6 — përsërite për disa minuta. Kalon, zakonisht brenda 20 minutash. Kërko mjek nëse ke dhimbje gjoksi që shkon te krahu a nofulla, ose nuk po të lehtësohet."),
+     "WARNING: A panic attack feels like you cannot breathe, but your body IS getting enough air. Sit down. Put one hand on your belly. Breathe in slowly through the nose counting to 4, out through the mouth counting to 6 - repeat for several minutes. It passes, usually within 20 minutes. Get medical help if there is chest pain spreading to the arm or jaw, or it does not ease.",
+     "KUJDES: Ataku i panikut të bën të ndihesh sikur s'merr dot frymë, por trupi PO merr ajër mjaftueshëm. Ulu. Vër njërën dorë mbi bark. Merr frymë ngadalë nga hunda duke numëruar deri në 4, nxirre nga goja duke numëruar deri në 6 - përsërite për disa minuta. Kalon, zakonisht brenda 20 minutash. Kërko mjek nëse ke dhimbje gjoksi që shkon te krahu a nofulla, ose nuk po të lehtësohet."),
 
     ("high-sugar",
      r"high (blood )?sugar|hyperglyc|aceton\w*.{0,15}(breath|smell|mouth)|ketoacid|sugar.{0,18}(400|350|300|very high)",
      r"sheqer\w* (i |t[ëe] )?lart[ëe]|era aceton|hiperglicemi|sheqeri (400|350|300)",
-     "WARNING: High blood sugar with acetone-smelling breath, deep breathing, belly pain or drowsiness can be diabetic ketoacidosis — a medical emergency. Do NOT give sugar. Small sips of plain water if fully awake, their own diabetes medicine ONLY as prescribed, and medical help NOW. Drowsiness or confusion = critical.",
-     "KUJDES: Sheqeri i lartë me erë acetoni nga goja, frymëmarrje të thellë, dhimbje barku a përgjumje mund të jetë ketoacidozë diabetike — urgjencë mjekësore. MOS i jep sheqer. Gllënjka të vogla ujë të thjeshtë nëse është plotësisht zgjuar, ilaçet e veta të diabetit VETËM siç i ka të përshkruara, dhe ndihmë mjekësore TANI. Përgjumja a hutimi = kritike."),
+     "WARNING: High blood sugar with acetone-smelling breath, deep breathing, belly pain or drowsiness can be diabetic ketoacidosis - a medical emergency. Do NOT give sugar. Small sips of plain water if fully awake, their own diabetes medicine ONLY as prescribed, and medical help NOW. Drowsiness or confusion = critical.",
+     "KUJDES: Sheqeri i lartë me erë acetoni nga goja, frymëmarrje të thellë, dhimbje barku a përgjumje mund të jetë ketoacidozë diabetike - urgjencë mjekësore. MOS i jep sheqer. Gllënjka të vogla ujë të thjeshtë nëse është plotësisht zgjuar, ilaçet e veta të diabetit VETËM siç i ka të përshkruara, dhe ndihmë mjekësore TANI. Përgjumja a hutimi = kritike."),
 
     ("eye-injury",
      r"(hit|ball|punch|blow|elbow).{0,25}eye|eye.{0,25}(hit|blunt|trauma|punch)|can'?t see.{0,28}(after|hit|blow)",
      r"(goditi|goditje|grusht|top(i)?).{0,28}sy|sy\w*.{0,25}(goditj|grusht)|(goditi|goditje).{0,32}nuk sheh",
-     "WARNING: A blow to the eye with any change in vision is urgent. Do NOT press or rub the eye, and put NO drops or ointments in it. Cover it loosely with a rigid shield resting on the bone (a clean paper cup taped in place works). Keep them half-sitting. See an eye doctor URGENTLY — bleeding inside the eye cannot be judged from outside.",
-     "KUJDES: Goditja në sy me çfarëdo ndryshimi të shikimit është urgjente. MOS e shtyp dhe mos e fërko syrin, dhe MOS fut pika a pomada. Mbuloje lirshëm me diçka të fortë që mbështetet në kockë (një gotë letre e pastër e ngjitur me leukoplast). Mbaje gjysmë-ulur. Shko URGJENT te okulisti — gjakderdhja brenda syrit nuk gjykohet dot nga jashtë."),
+     "WARNING: A blow to the eye with any change in vision is urgent. Do NOT press or rub the eye, and put NO drops or ointments in it. Cover it loosely with a rigid shield resting on the bone (a clean paper cup taped in place works). Keep them half-sitting. See an eye doctor URGENTLY - bleeding inside the eye cannot be judged from outside.",
+     "KUJDES: Goditja në sy me çfarëdo ndryshimi të shikimit është urgjente. MOS e shtyp dhe mos e fërko syrin, dhe MOS fut pika a pomada. Mbuloje lirshëm me diçka të fortë që mbështetet në kockë (një gotë letre e pastër e ngjitur me leukoplast). Mbaje gjysmë-ulur. Shko URGJENT te okulisti - gjakderdhja brenda syrit nuk gjykohet dot nga jashtë."),
 
     ("jellyfish",
      r"jellyfish|sea nettle|stung.{0,22}(sea|beach|swimming)",
      r"kandil\w* (i |t[ëe] )?det\w*|m[ëe] dogji kandili|pickim.{0,18}det",
-     "WARNING: Jellyfish sting: rinse with SEA water — NOT fresh water, it makes the stingers fire more venom. Scrape off any tentacle pieces with the edge of a card; do not rub with sand or a towel. Then soak in hot (not scalding) water or apply a hot compress for about 20 minutes for the pain. Get help urgently for trouble breathing, chest pain, or stings over a large area.",
-     "KUJDES: Djegia nga kandili i detit: shpëlaje me ujë DETI — JO ujë të ëmbël, se i bën thumbat të lëshojnë më shumë helm. Kruaji copëzat e tentakulave me buzën e një karte; mos e fërko me rërë a peshqir. Pastaj zhyte në ujë të nxehtë (jo përvëlues) ose vër kompresë të nxehtë rreth 20 minuta për dhimbjen. Kërko ndihmë urgjente për vështirësi në frymëmarrje, dhimbje gjoksi, ose djegie në sipërfaqe të madhe."),
+     "WARNING: Jellyfish sting: rinse with SEA water - NOT fresh water, it makes the stingers fire more venom. Scrape off any tentacle pieces with the edge of a card; do not rub with sand or a towel. Then soak in hot (not scalding) water or apply a hot compress for about 20 minutes for the pain. Get help urgently for trouble breathing, chest pain, or stings over a large area.",
+     "KUJDES: Djegia nga kandili i detit: shpëlaje me ujë DETI - JO ujë të ëmbël, se i bën thumbat të lëshojnë më shumë helm. Kruaji copëzat e tentakulave me buzën e një karte; mos e fërko me rërë a peshqir. Pastaj zhyte në ujë të nxehtë (jo përvëlues) ose vër kompresë të nxehtë rreth 20 minuta për dhimbjen. Kërko ndihmë urgjente për vështirësi në frymëmarrje, dhimbje gjoksi, ose djegie në sipërfaqe të madhe."),
 
     ("sea-urchin",
      r"sea urchin|urchin.{0,15}spine|stepped on.{0,15}urchin",
      r"iriq\w* (i |t[ëe] )?det\w*|gjemba\w*.{0,28}(iriq|deti)",
-     "WARNING: Sea urchin spines: pull the visible spines out gently with tweezers — do NOT crush them. Soak the foot in hot (not scalding) water for 30-60 minutes; it eases the pain and helps the spines. Spines broken off deep in the skin or near a joint need a health worker. Watch for infection over the next days.",
-     "KUJDES: Gjembat e iriqit të detit: hiqi gjembat e dukshëm butë me pincetë — MOS i shtyp. Zhyte këmbën në ujë të nxehtë (jo përvëlues) për 30-60 minuta; ia lehtëson dhimbjen. Gjembat e thyer thellë në lëkurë ose pranë nyjeve duan mjek. Vëzhgo për infeksion ditët në vijim."),
+     "WARNING: Sea urchin spines: pull the visible spines out gently with tweezers - do NOT crush them. Soak the foot in hot (not scalding) water for 30-60 minutes; it eases the pain and helps the spines. Spines broken off deep in the skin or near a joint need a health worker. Watch for infection over the next days.",
+     "KUJDES: Gjembat e iriqit të detit: hiqi gjembat e dukshëm butë me pincetë - MOS i shtyp. Zhyte këmbën në ujë të nxehtë (jo përvëlues) për 30-60 minuta; ia lehtëson dhimbjen. Gjembat e thyer thellë në lëkurë ose pranë nyjeve duan mjek. Vëzhgo për infeksion ditët në vijim."),
 
     ("heat-cramps",
      r"(heat|exercise|playing|football).{0,22}cramp|cramp\w*.{0,28}(heat|sun|playing|exercise|football)",
      r"kramp\w*.{0,32}(vap[ëe]|diell|duke luajtur|st[ëe]rvit|futboll)|(vap[ëe]|diell|futboll).{0,30}kramp",
-     "WARNING: Heat cramps: stop the activity, rest in the shade, and drink water with a pinch of salt or the rehydration drink. Stretch and gently massage the cramped muscle. Do NOT take salt tablets. If cramps last over an hour, or dizziness and vomiting begin, treat it as heat exhaustion — cool them down and get help.",
-     "KUJDES: Krampet nga vapa: ndalo lojën, pusho në hije dhe pi ujë me një majë kripe ose pijen rehidruese. Shtriqe dhe masazho butë muskulin e ngërçuar. MOS merr tableta kripe. Nëse krampet zgjasin mbi një orë, ose nisin marramendje e të vjella, trajtoje si lodhje nga vapa — ftohe dhe kërko ndihmë."),
+     "WARNING: Heat cramps: stop the activity, rest in the shade, and drink water with a pinch of salt or the rehydration drink. Stretch and gently massage the cramped muscle. Do NOT take salt tablets. If cramps last over an hour, or dizziness and vomiting begin, treat it as heat exhaustion - cool them down and get help.",
+     "KUJDES: Krampet nga vapa: ndalo lojën, pusho në hije dhe pi ujë me një majë kripe ose pijen rehidruese. Shtriqe dhe masazho butë muskulin e ngërçuar. MOS merr tableta kripe. Nëse krampet zgjasin mbi një orë, ose nisin marramendje e të vjella, trajtoje si lodhje nga vapa - ftohe dhe kërko ndihmë."),
 ]
 
 
@@ -354,13 +354,13 @@ CONTRA = {
     "stroke": (
         r"(^|\n).{0,80}(stand behind (him|her|them)|wrap your arms around|abdominal thrust)",
         "This is a possible STROKE, not choking. Do NOT do abdominal thrusts.\n"
-        "1. Get emergency medical help immediately — minutes matter.\n"
+        "1. Get emergency medical help immediately - minutes matter.\n"
         "2. Note the exact time the symptoms started and tell the medics.\n"
         "3. Keep him still, seated or lying with head slightly raised.\n"
         "4. Do NOT give food, drink, or any medicine.\n"
         "5. If he becomes drowsy or vomits, turn him gently onto his side.",
         "Kjo mund të jetë GODITJE NË TRU, jo mbytje me ushqim. MOS bëj shtytje barku.\n"
-        "1. Kërko menjëherë ndihmë mjekësore urgjente — çdo minutë ka rëndësi.\n"
+        "1. Kërko menjëherë ndihmë mjekësore urgjente - çdo minutë ka rëndësi.\n"
         "2. Shëno orën e saktë kur nisën shenjat dhe tregojua mjekëve.\n"
         "3. Mbaje të qetë, ulur ose shtrirë me kokën pak të ngritur.\n"
         "4. MOS i jep ushqim, pije a ilaçe.\n"
@@ -368,16 +368,16 @@ CONTRA = {
     ),
     "drowning": (
         r"heel of (your|the) (lower )?hand on (his|her|their|the) belly|belly.{0,40}upward push|push.{0,30}water out",
-        "Keep them on their SIDE in the recovery position — do NOT push on the belly to force water out.\n"
+        "Keep them on their SIDE in the recovery position - do NOT push on the belly to force water out.\n"
         "1. Lay them on their side, head slightly back.\n"
         "2. Keep them warm and still; remove wet clothes.\n"
         "3. Watch their breathing constantly. If it stops, start CPR.\n"
-        "4. Get them to medical care — every drowning patient needs to be checked.",
-        "Mbaje në KRAH në pozicionin e shpëtimit — MOS ia shtyp barkun për të nxjerrë ujin.\n"
+        "4. Get them to medical care - every drowning patient needs to be checked.",
+        "Mbaje në KRAH në pozicionin e shpëtimit - MOS ia shtyp barkun për të nxjerrë ujin.\n"
         "1. Shtrije në krah, me kokën pak prapa.\n"
         "2. Mbaje ngrohtë e të qetë; hiqi rrobat e lagura.\n"
         "3. Vëzhgo frymëmarrjen vazhdimisht. Nëse ndalon, fillo CPR.\n"
-        "4. Çoje te mjeku — çdo i mbytur duhet kontrolluar.",
+        "4. Çoje te mjeku - çdo i mbytur duhet kontrolluar.",
     ),
     "heart-attack": (
         r"epipen|epinephrine|adrenaline",
@@ -411,12 +411,12 @@ CONTRA = {
     ),
     "fishbone": (
         r"stand behind|wrap your arms|abdominal thrust|heimlich|(back|shoulder) blows",
-        "A stuck fish bone in someone who can breathe and talk is NOT choking — no back blows, no abdominal thrusts.\n"
+        "A stuck fish bone in someone who can breathe and talk is NOT choking - no back blows, no abdominal thrusts.\n"
         "1. Have them try a few sips of water or a bite of soft bread.\n"
         "2. Do not poke fingers or objects down the throat.\n"
         "3. If it does not pass, or pain, drooling or swallowing trouble grows, see a health worker.\n"
         "4. Emergency help only if they truly cannot breathe.",
-        "Halë peshku e ngecur te dikush që merr frymë e flet NUK është mbytje — pa goditje shpine, pa shtytje barku.\n"
+        "Halë peshku e ngecur te dikush që merr frymë e flet NUK është mbytje - pa goditje shpine, pa shtytje barku.\n"
         "1. Le të provojë pak gllënjka ujë ose një kafshatë bukë të butë.\n"
         "2. Mos fut gishta a sende në fyt.\n"
         "3. Nëse nuk kalon, ose shtohet dhimbja, jargët a vështirësia në gëlltitje, shkoni te mjeku.\n"
@@ -424,15 +424,15 @@ CONTRA = {
     ),
     "nose-object": (
         r"stand behind|wrap your arms around|abdominal thrust|(back|shoulder) blows|heimlich",
-        "This is a foreign object in the NOSE, not choking — no back blows, no abdominal thrusts.\n"
+        "This is a foreign object in the NOSE, not choking - no back blows, no abdominal thrusts.\n"
         "1. Have the child breathe calmly through the mouth.\n"
-        "2. Do not poke anything into the nostril — it pushes the object deeper.\n"
+        "2. Do not poke anything into the nostril - it pushes the object deeper.\n"
         "3. Close the free nostril with a finger and have them blow out sharply several times.\n"
         "4. If the object does not come out, see a health worker the same day.\n"
         "5. Get urgent help only if they truly cannot breathe.",
-        "Ky është një send në HUNDË, jo mbytje me ushqim — pa goditje shpine, pa shtytje barku.\n"
+        "Ky është një send në HUNDË, jo mbytje me ushqim - pa goditje shpine, pa shtytje barku.\n"
         "1. Le të marrë fëmija frymë i qetë me gojë.\n"
-        "2. Mos fut asgjë në vrimën e hundës — e shtyn sendin më thellë.\n"
+        "2. Mos fut asgjë në vrimën e hundës - e shtyn sendin më thellë.\n"
         "3. Mbylli me gisht vrimën e lirë dhe le të nxjerrë frymën fort disa herë.\n"
         "4. Nëse sendi nuk del, shkoni te mjeku brenda ditës.\n"
         "5. Kërko ndihmë urgjente vetëm nëse vërtet nuk merr dot frymë.",
@@ -489,7 +489,7 @@ def body_guard(names, resp_en, is_sq):
 
 
 # Sentences that are dangerous AS WRITTEN (they contain their own negation
-# of correct care) — removed wherever they appear, any rule context.
+# of correct care) - removed wherever they appear, any rule context.
 _SCRUB_NEG = [
     r"\b(do not|don'?t|never|it is not safe to) (attempt|give|start|perform|try)\b.{0,60}\b(cpr|rescue breath|chest compression)",
     r"\bnot safe to (continue|keep)\b.{0,45}\bpressure\b",
@@ -549,9 +549,9 @@ MED_PATTERN = re.compile(
     r"|antihistamin\w*|promethazin\w*|prometazin\w*|phenergan|fenergan"
     r"|dimenhydrinat\w*|dimenhidrinat\w*|diazepam|codeine|kodein\w*", re.IGNORECASE)
 MED_CAUTION_EN = ("WARNING: Do not take prescription medicines without advice "
-                  "from a health worker — the wrong drug or dose can cause harm.")
+                  "from a health worker - the wrong drug or dose can cause harm.")
 MED_CAUTION_SQ = ("KUJDES: Mos merrni ilaçe me recetë pa këshillën e një punonjësi "
-                  "shëndetësor — ilaçi ose doza e gabuar mund të dëmtojë.")
+                  "shëndetësor - ilaçi ose doza e gabuar mund të dëmtojë.")
 
 
 def med_caution(resp_en):
@@ -581,7 +581,7 @@ if __name__ == "__main__":
         ("should i loosen the tourniquet", None, False, ["tourniquet"]),
         ("i have a headache", None, False, []),
         ("me dhemb koka", "my head hurts", True, []),
-        # 2026-08-31 long-eval misses — colloquial diacritic-free forms:
+        # 2026-08-31 long-eval misses - colloquial diacritic-free forms:
         ("me kafshoi gjarpri ne mal cfare bej tani", "x", True, ["snakebite"]),
         ("ra nga pema dhe nuk i ndjen kembet fare", "x", True, ["spinal"]),
         ("po dridhet i teri me shkume ne goje dhe nuk ndalon", "x", True, ["seizure"]),

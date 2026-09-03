@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""NOAH e-ink renderer — IT8951 (7.8" 1872x1404) over SPI on Jetson Orin Nano.
+"""NOAH e-ink renderer - IT8951 (7.8" 1872x1404) over SPI on Jetson Orin Nano.
 
 Proven protocol recipe (2026-08-26 bring-up):
   * 4 MHz SPI max on current wiring; wait HRDY before EVERY preamble
@@ -7,7 +7,7 @@ Proven protocol recipe (2026-08-26 bring-up):
   * displays via DPY_BUF_AREA 0x0037 only (0x0034 dies after first use)
   * VCOM must be programmed (-1.58 V) every panel power-on
   * DU (mode 1) / A2 (mode 6) complete on current 5 V wiring; full-screen
-    GC16 (mode 2) aborts until the power feed is upgraded — use DU for text.
+    GC16 (mode 2) aborts until the power feed is upgraded - use DU for text.
 
 Usage:
     from eink import EInk
@@ -106,7 +106,7 @@ class EInk:
     # ---------- image path ----------
     def _load(self, img, x=0, y=0, addr=None):
         """img: np.uint8 (h, w), row-major, 0=black 255=white. 4bpp transfer
-        (half the bytes of 8bpp — text is thresholded B/W, no quality loss)."""
+        (half the bytes of 8bpp - text is thresholded B/W, no quality loss)."""
         h, w = img.shape
         addr = self.imgbuf if addr is None else addr
         self._wreg(0x0208, addr & 0xFFFF)
@@ -156,7 +156,7 @@ class EInk:
         return dur
 
     # --- dual-buffer page slots: preload while reading, flip in ~0.5s ---
-    SLOT_STRIDE = 0x290000  # TRUE 8bpp frame footprint 0x281AC0 + pad. RAM fits ONLY slots 0 (imgbuf) and 1 — see 2026-08-29 probe; never add more
+    SLOT_STRIDE = 0x290000  # TRUE 8bpp frame footprint 0x281AC0 + pad. RAM fits ONLY slots 0 (imgbuf) and 1 - see 2026-08-29 probe; never add more
 
     def load_page(self, img, slot=0):
         self._load(img, addr=self.imgbuf + slot * self.SLOT_STRIDE)
@@ -165,7 +165,7 @@ class EInk:
         return self._display(mode, addr=self.imgbuf + slot * self.SLOT_STRIDE)
 
     def deep_clean(self):
-        """Two half-screen GC16 passes — heavier ghost flush (half current draw)."""
+        """Two half-screen GC16 passes - heavier ghost flush (half current draw)."""
         white = np.full((H, W), 0xFF, dtype=np.uint8)
         self._load(white)
         self._display(MODE_GC16, 0, 0, W, H // 2)
@@ -272,4 +272,4 @@ if __name__ == "__main__":
     dur = epd.show(pages[0])
     print("page 1/%d shown (load+refresh %.1fs, engine %.1fs)" % (len(pages), time.time() - t0, dur))
     epd.close()
-    print("PASS — the panel should show a formatted first-aid page")
+    print("PASS - the panel should show a formatted first-aid page")

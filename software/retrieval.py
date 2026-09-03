@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""NOAH hybrid retrieval — vector (nomic) + BM25 with reciprocal-rank fusion,
+"""NOAH hybrid retrieval - vector (nomic) + BM25 with reciprocal-rank fusion,
 plus a deterministic crisis-vocabulary -> clinical-term query expansion.
 
 Why: panicked lay queries ("collapsed, not breathing", "knife stuck in my leg")

@@ -1,6 +1,6 @@
 # The safety system
 
-The heart of NOAH is not the language model — it is the deterministic layer
+The heart of NOAH is not the language model - it is the deterministic layer
 in [`safety.py`](../software/safety.py) that stands between the model and a
 person in an emergency. It was built empirically across **13 adversarial
 audit rounds** (hundreds of Albanian and English questions, every failure
@@ -29,8 +29,8 @@ fixed and locked with a regression test).
    "stop the birth", model-initiated tourniquets, "help them stand up"
    after falls, prompt echoes, plus a repetition-loop collapse.
 4. **Veto map.** A specific rule silences a contradicting generic one
-   (jellyfish ▸ burn — sea water vs fresh water; ketoacidosis ▸ hypoglycemia
-   — no sugar vs give sugar; fishbone/nose-object ▸ choking).
+   (jellyfish ▸ burn - sea water vs fresh water; ketoacidosis ▸ hypoglycemia
+   - no sugar vs give sugar; fishbone/nose-object ▸ choking).
 5. **Medication caution.** Any answer naming prescription drugs gets a
    bilingual "not without a health worker" line appended.
 
@@ -45,7 +45,7 @@ bugs in its own new rules before deployment more than once.
 
 ## Notable catches from the audit rounds
 
-These are real outputs the layers now prevent — kept here as a reminder of
+These are real outputs the layers now prevent - kept here as a reminder of
 why the floor exists:
 
 - "Loosen the tourniquet to let the blood circulate" (model, 3 of 3 runs)
@@ -58,10 +58,10 @@ why the floor exists:
 - Fresh-water rinse for a jellyfish sting
 - "The device can't help, find somebody to talk to" for "I feel sick"
 
-## Limits — be honest with users
+## Limits - be honest with users
 
 The layer reduces risk; it cannot eliminate it. The model body under a
 correct warning can still be clumsy or off-topic; translations still
 produce occasional howlers; and no rule exists for classes nobody has
 tested yet. Every transcript in `software/eval/` deserves a professional
-medical read — if you build on this, continue the audit loop.
+medical read - if you build on this, continue the audit loop.

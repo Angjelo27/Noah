@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""NOAH translation layer — NLLB-200-600M via ctranslate2 int8 on CPU.
+"""NOAH translation layer - NLLB-200-600M via ctranslate2 int8 on CPU.
 
 MT sandwich: Albanian queries -> English before retrieval; English answers ->
 Albanian after generation. The LLM never needs Albanian (gemma3:4b failed it).
@@ -27,7 +27,7 @@ def _get():
     return _tok, _ct
 
 
-# Words that essentially never appear in English text — deterministic sq signal.
+# Words that essentially never appear in English text - deterministic sq signal.
 SQ_STRONG = {
     "cfare", "çfarë", "eshte", "është", "duhet", "bej", "bëj", "kembe", "këmbë",
     "kafshoi", "kafshuar", "dogj", "djeg", "thike", "thikë", "helm", "helmuar",
@@ -106,7 +106,7 @@ SQ_IDIOMS = [
     ("pa ndjenja", "pa vetëdije"),
     ("i ra te fiket", "ka humbur vetëdijen"),
     ("i bie te fiket", "po humb vetëdijen"),
-    # ambiguous nouns NLLB mistranslates — embed the English term to steer it
+    # ambiguous nouns NLLB mistranslates - embed the English term to steer it
     # (round 7: "flluskë"→bubble→trouser flotation; "kyçi"→cord care)
     ("flluske", "blister (fshikëz)"),
     ("flluska", "blister (fshikëz)"),

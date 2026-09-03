@@ -8,21 +8,21 @@ The STLs are exported print-ready in real-world millimeters.
 | File | Part | Material |
 |---|---|---|
 | `STL/NOAH_Shell.stl` | Main clamshell body (print whole on ≥300 mm beds) | PETG |
-| `Shell_Cuts/ShellV_*, ShellH_*, ShellQ_*` | The same shell pre-cut in halves/quarters for smaller printers — pick ONE scheme | PETG |
+| `Shell_Cuts/ShellV_*, ShellH_*, ShellQ_*` | The same shell pre-cut in halves/quarters for smaller printers - pick ONE scheme | PETG |
 | `STL/NOAH_FrontPlate.stl` | Front plate with keyboard bay | PETG |
 | `STL/NOAH_Visor.stl` | Screen visor (magnet-mounted) | PETG |
 | `STL/NOAH_ScreenRetainer.stl` | Clamps the e-ink panel | PETG |
 | `STL/NOAH_BasePlate.stl` | Bottom closure | PETG |
-| `STL/NOAH_SidePlate_L.stl` / `_R.stl` | Side plates — **different designs, not mirrors** (L = camo, R = louver vents) | PETG |
+| `STL/NOAH_SidePlate_L.stl` / `_R.stl` | Side plates - **different designs, not mirrors** (L = camo, R = louver vents) | PETG |
 | `STL/NOAH_RuggedTrim.stl`, `NOAH_Rugged_Trim.stl` | Edge trim | PETG |
 | `STL/NOAH_LED_Lens.stl` | LED light pipe | Clear PETG/PLA |
 | `bumpers/*`, `STL/NOAH_Bumper_*`, `STL/NOAH_RubberBumpers.stl` | Corner/edge/drop bumpers | **TPU** |
 | `STL/NOAH_SolarTabLock_L/R.stl` | Solar panel retainers | PETG |
-| `STL/NOAH_FitCoupon_*.stl` | Tolerance test pieces — **print these first** | any |
+| `STL/NOAH_FitCoupon_*.stl` | Tolerance test pieces - **print these first** | any |
 
 ## Print settings (starting points)
 
-- PETG: 0.2 mm layers, 4 perimeters, 25–40 % infill on structural parts.
+- PETG: 0.2 mm layers, 4 perimeters, 25-40 % infill on structural parts.
 - TPU bumpers: 0.2 mm, 2 perimeters, 15 % gyroid, slow.
 - The shell prints without supports in its designed orientation; the visor
   face-down for a clean window edge.

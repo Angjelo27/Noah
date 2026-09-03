@@ -1,4 +1,4 @@
-# SQ audit round 7 — 2026-09-01 — uncovered classes + mode tests
+# SQ audit round 7 - 2026-09-01 - uncovered classes + mode tests
 femija ka rene nga shkallet dhe ka nje gunge te madhe ne koke
 me ka hyre nje gjemb ne kembe dhe me eshte infektuar
 i vjen ere gazi ne shtepi cfare te bejme

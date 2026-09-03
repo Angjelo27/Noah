@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""NOAH device UI — standalone e-ink + USB-keyboard interface.
+"""NOAH device UI - standalone e-ink + USB-keyboard interface.
 
 Runs on the console TTY at boot (noah-ui.service) or manually via
 `sudo python3 noah_ui.py`. Keys: type + ENTER = ask; while an answer is
@@ -21,7 +21,7 @@ from eink import W, H, MODE_DU, MODE_A2, MODE_GC16
 
 EPD = assistant.EPD
 if EPD is None:
-    print("[noah-ui] FATAL: e-ink panel unavailable — check wiring/pinmux", flush=True)
+    print("[noah-ui] FATAL: e-ink panel unavailable - check wiring/pinmux", flush=True)
     sys.exit(1)
 
 FD = "/usr/share/fonts/truetype/dejavu/"
@@ -196,7 +196,7 @@ def _power_button_thread():
         r, _, _ = select.select(fds, [], [], 0.25)
         now = time.time()
         if now - last_tick > 5.0:      # we slept through a suspend: the next
-            guard_until = now + 5.0    # events are the wake press — ignore
+            guard_until = now + 5.0    # events are the wake press - ignore
             pressed_at = None
         last_tick = now
         for fd in r:
@@ -258,7 +258,7 @@ def ensure_home_slot():
 
 
 def flash_home():
-    """-> home: FULL-SCREEN deep repaint — fresh home image loaded into the
+    """-> home: FULL-SCREEN deep repaint - fresh home image loaded into the
     main buffer, then GC16 over each half (full screen in one GC16 pass
     power-aborts on the thin 5V feed; halves complete). GC16 drives every
     pixel regardless of the controller's frame belief, so each return home
@@ -266,7 +266,7 @@ def flash_home():
     behind (user-chosen 2026-08-29: dumb full repaints beat smart diffs on
     this hardware). The old stitched-frame bug blamed on these halves was
     actually the slot-overlap RAM bug, since fixed; halves run from the
-    MAIN buffer only — area ops from imgbuf are the weeks-proven class."""
+    MAIN buffer only - area ops from imgbuf are the weeks-proven class."""
     global _partials, _prev_strip, _home_np
     if _home_np is None:
         _home_np = home_image("", "gati · ready")
@@ -375,7 +375,7 @@ def ask(question):
 def paging_loop(pages):
     """Show pages; return None to go home, or a first char of a new question.
     SINGLE-BUFFER paging: controller RAM holds exactly two frames (8bpp
-    footprints — see HOME_SLOT note) and the second one parks the home
+    footprints - see HOME_SLOT note) and the second one parks the home
     screen, so pages go through the main buffer. A page turn costs ~4s
     (load + display); the old dual-slot preload SILENTLY CORRUPTED
     overlapping frames and must never come back at this RAM size."""
@@ -448,7 +448,7 @@ def main():
                 buf, dirty = "", False
                 continue
             if now - last_iter > 8.0:          # time jump = we just woke up
-                print("[noah-ui] wake detected — redrawing home", flush=True)
+                print("[noah-ui] wake detected - redrawing home", flush=True)
                 drain()
                 flash_home()                   # deep GC16 rewrite: no sleep-screen ghosts
                 buf, dirty = "", False
@@ -462,7 +462,7 @@ def main():
                         # mashed/held keys: don't burn an LLM call on garbage
                         print("[noah-ui] rejected garbage input: %r" % q[:40], flush=True)
                         buf = ""
-                        update_input("", "Nuk u kuptua — shkruaj përsëri · Not understood — retype")
+                        update_input("", "Nuk u kuptua - shkruaj përsëri · Not understood - retype")
                         dirty = False
                         last_draw = time.time()
                     elif q:
@@ -470,7 +470,7 @@ def main():
                         pages = ask(q)
                         buf = ""
                         if pages is None:
-                            update_input("", "gabim — provo përsëri · error — try again")
+                            update_input("", "gabim - provo përsëri · error - try again")
                         else:
                             nxt = paging_loop(pages)
                             flash_home()                # one GC16 transition, deghosts too
@@ -483,7 +483,7 @@ def main():
                                                         # answering/reading trips the
                                                         # >8s wake detector and home
                                                         # repaints twice
-                elif b in (127, 8):                     # backspace: WORD-wise —
+                elif b in (127, 8):                     # backspace: WORD-wise -
                     # remove the trailing word plus any punctuation stuck to it
                     # (or a bare trailing punctuation run), then redraw
                     buf = re.sub(r"(\w+\W*|\W+)$", "", buf)

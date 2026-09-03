@@ -52,6 +52,6 @@ stamp("slot1' tail: %s (%s)" % (t2[:8].hex(), "MARKER" if t2[:8] == b"\xf0" * 8 
 # original imgbuf frame must be UNTOUCHED by the slot1' load (no overlap)
 r1000 = burst_read(EPD.imgbuf + 1000 * 1872, 16)
 stamp("imgbuf row1000 after slot1' load: %s (%s)" % (r1000[:8].hex(),
-      "STILL MARKER — no overlap" if r1000[:8] == b"\xf0" * 8 else "CLOBBERED"))
+      "STILL MARKER - no overlap" if r1000[:8] == b"\xf0" * 8 else "CLOBBERED"))
 d = EPD._display(eink.MODE_DU, addr=BASE2)
-stamp("display from slot1' ok %.2fs — ALL CHECKS DONE" % d)
+stamp("display from slot1' ok %.2fs - ALL CHECKS DONE" % d)

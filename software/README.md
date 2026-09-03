@@ -1,7 +1,7 @@
 # NOAH software
 
 Everything runs on the Jetson under a single systemd service. Paths assume
-user `aldo` with code in `/home/aldo` — either create that user or search
+user `aldo` with code in `/home/aldo` - either create that user or search
 and replace the paths in the `.py` files and service units.
 
 ## Components
@@ -51,18 +51,18 @@ ct2-transformers-converter --model facebook/nllb-200-distilled-600M \
   --output_dir /data/models/nllb-ct2-int8 --quantization int8
 ```
 
-### 4. Reference library (not included — copyright)
+### 4. Reference library (not included - copyright)
 
 Create `~/emergency-library/` and add:
 
-- **IFRC International First Aid, Resuscitation and Education Guidelines 2025** — ifrc.org
-- **WHO Psychological First Aid: Guide for Field Workers** — who.int
-- **Where There Is No Doctor** (David Werner) — free from hesperian.org
-- **FEMA "Are You Ready?"** — fema.gov (public domain)
-- **FM 21-76 US Army Survival Manual** — public domain; trim to the
+- **IFRC International First Aid, Resuscitation and Education Guidelines 2025** - ifrc.org
+- **WHO Psychological First Aid: Guide for Field Workers** - who.int
+- **Where There Is No Doctor** (David Werner) - free from hesperian.org
+- **FEMA "Are You Ready?"** - fema.gov (public domain)
+- **FM 21-76 US Army Survival Manual** - public domain; trim to the
   medical/survival chapters to keep retrieval focused
 
-Then build the index (stop ollama models you don't need first — ingest is
+Then build the index (stop ollama models you don't need first - ingest is
 memory-hungry):
 
 ```bash
@@ -74,7 +74,7 @@ python3 ingest.py     # → ~/emergency-db (about 4,800 chunks)
 - Set `VCOM_MV` in `eink.py` to YOUR panel's sticker value.
 - The pinmux service is mandatory (see `hardware/wiring.md`).
 - SPI stays at 4 MHz; the controller stores every frame as 8 bits/pixel
-  internally — its 8 MB RAM fits exactly two frames. Do not add parked
+  internally - its 8 MB RAM fits exactly two frames. Do not add parked
   buffers; do not use partial-area displays from parked slots. These limits
   were mapped the hard way; `tools/` contains the probes that proved them.
 
@@ -100,5 +100,5 @@ python3 sq_eval_runner.py sq_long_questions.txt /tmp/out.txt
 
 `safety.py` doubles as a regression test: `python3 safety.py` must print
 `ALL PASS` after any rule change. When you find a new failure mode, the
-workflow is: add the rule/pattern + a matrix case + re-run the question —
+workflow is: add the rule/pattern + a matrix case + re-run the question -
 that loop, repeated over 13 audit rounds, is where the safety layer came from.

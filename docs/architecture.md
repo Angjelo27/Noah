@@ -41,8 +41,8 @@
   half-screen GC16 passes; typing uses 16px-aligned A2 partial strips with a
   self-healing pass on every return home.
 - **Power states.** Short button press = suspend (RAM + warm model kept,
-  ~3 s wake). Long press = a persistent "powered off" screen — e-ink keeps
-  the image at zero power — then clean shutdown.
+  ~3 s wake). Long press = a persistent "powered off" screen - e-ink keeps
+  the image at zero power - then clean shutdown.
 
 ## Timings (measured on the prototype)
 
@@ -50,6 +50,6 @@
 |---|---|
 | Cold boot → READY | ~60 s |
 | Wake from suspend | ~3 s |
-| English answer | 7–18 s |
-| Albanian answer | 25–40 s |
+| English answer | 7-18 s |
+| Albanian answer | 25-40 s |
 | Deep home repaint | ~5.5 s |

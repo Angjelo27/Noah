@@ -14,7 +14,7 @@ qs = [l.strip() for l in open(QF, encoding="utf-8")
       if l.strip() and not l.startswith("#")]
 
 out = open(OUT, "w", encoding="utf-8")
-out.write("NOAH long Albanian eval — %s — %d questions — model %s\n"
+out.write("NOAH long Albanian eval - %s - %d questions - model %s\n"
           % (time.strftime("%Y-%m-%d %H:%M"), len(qs), assistant.MODEL))
 out.flush()
 
