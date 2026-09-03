@@ -9,8 +9,6 @@ displays on a 7.8" e-ink panel, and takes input from a pocket keyboard. No
 internet, no cloud, no account - press the button, type the question, get the
 steps.
 
-![NOAH prototype](docs/images/device-prototype.jpg)
-
 ## Why
 
 In an emergency without connectivity - mountains, blackouts, disasters - the
