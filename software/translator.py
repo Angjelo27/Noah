@@ -194,6 +194,7 @@ SQ_FIXES = [
     (r"frym[ëe]zon\b", "merr frymë"),
     (r"frym[ëe]zo\w*", "merrni frymë"),
     (r"hidhni (ndonj[ëe] |çdo )?gjak\w*", "pështyjeni gjakun"),
+    (r"(t[ëe] )?flis\w* gjak\w*", "pështyni gjakun"),
     (r"shp[ëe]rth\w+ (çdo|ndonj[ëe]) gjak\w*( q[ëe] d\w+)?", "pështyjeni çdo gjak që del"),
     (r"\bqyshje\b", "vjellje"),
     (r"uj[ëe] t[ëe] ftoht[ëe] \(jo t[ëe] ftoht[ëe]\)", "ujë të vakët (jo të akullt)"),
