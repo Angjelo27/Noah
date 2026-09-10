@@ -31,7 +31,7 @@ W, H = 1872, 1404
 MODE_INIT, MODE_DU, MODE_GC16, MODE_A2 = 0, 1, 2, 6
 
 FONT_DIR = "/usr/share/fonts/truetype/dejavu/"
-MARGIN, TITLE_SIZE, BODY_SIZE, FOOT_SIZE = 60, 48, 40, 28
+MARGIN, TITLE_SIZE, BODY_SIZE, FOOT_SIZE = 118, 48, 40, 28  # 118px = 1cm @ 300dpi
 LINE_PITCH = 54
 GHOST_FLUSH_EVERY = 8      # white-flush before every Nth refresh
 
@@ -213,7 +213,7 @@ class EInk:
         if title:
             title_lines = self._wrap(probe, title.strip(), self._fonts["title"], maxw)[:2]
             top += len(title_lines) * (TITLE_SIZE + 10) + 26
-        usable = H - top - (FOOT_SIZE + 30 + MARGIN // 2)
+        usable = H - top - (FOOT_SIZE + 30 + MARGIN)
         per_page = max(1, usable // LINE_PITCH)
         chunks = [body_lines[i:i + per_page] for i in range(0, len(body_lines), per_page)] or [[]]
 
@@ -231,7 +231,7 @@ class EInk:
             for ln in chunk:
                 d.text((MARGIN, y), ln, font=self._fonts["body"], fill=0)
                 y += LINE_PITCH
-            fy = H - MARGIN // 2 - FOOT_SIZE
+            fy = H - MARGIN - FOOT_SIZE
             avail = maxw
             if len(chunks) > 1:                  # page label only when it means something
                 pg = "page %d/%d" % (pi + 1, len(chunks))
