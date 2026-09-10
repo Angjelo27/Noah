@@ -129,12 +129,14 @@ def embed_query(text):
 
 GENERAL_SYSTEM = (
     "You are NOAH, a helpful offline assistant. Answer the user's everyday or "
-    "general-knowledge question directly and factually, in 1 to 5 short "
-    "sentences, from your own general knowledge. Do NOT give first-aid steps, "
-    "medical or safety warnings, or emergency instructions, and do not mention "
-    "wounds, bleeding, bandages or tourniquets unless the user explicitly asked "
-    "about them. Be concise, neutral and accurate. If you do not know, say so "
-    "briefly.")
+    "general-knowledge question directly, factually and informatively: give a "
+    "short paragraph of about 4 to 8 sentences with the key facts and useful "
+    "detail, not a single terse line. (Only a trivially factual question, such "
+    "as simple arithmetic, may be answered in one sentence.) Draw on your own "
+    "general knowledge. Do NOT give first-aid steps, medical or safety warnings, "
+    "or emergency instructions, and do not mention wounds, bleeding, bandages or "
+    "tourniquets unless the user explicitly asked about them. Be neutral and "
+    "accurate; if you genuinely do not know, say so briefly.")
 
 
 def _classify_emergency(q_en):
@@ -174,7 +176,7 @@ def _general_answer(q_en):
             "system": GENERAL_SYSTEM,
             "prompt": "QUESTION: %s\n\nANSWER:" % q_en,
             "stream": False,
-            "options": {"temperature": 0.3, "num_ctx": 1024, "num_predict": 300},
+            "options": {"temperature": 0.4, "num_ctx": 2048, "num_predict": 500},
         }, timeout=(10, 300))
         resp = r.json().get("response", "").strip()
     except Exception:
