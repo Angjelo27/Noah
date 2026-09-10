@@ -233,13 +233,21 @@ class EInk:
                 y += LINE_PITCH
             fy = H - MARGIN - FOOT_SIZE
             avail = maxw
-            if len(chunks) > 1:                  # page label only when it means something
-                pg = "page %d/%d" % (pi + 1, len(chunks))
+            n = len(chunks)
+            foot_txt = footer
+            if n > 1:                            # multi-page: counter + nav hint
+                pg = "%d/%d" % (pi + 1, n)
                 pgw = probe.textlength(pg, font=self._fonts["foot"])
                 d.text((W - MARGIN - pgw, fy), pg, font=self._fonts["foot"], fill=0)
                 avail = maxw - pgw - 60
-            if footer:
-                ftxt = footer
+                if pi < n - 1:                   # a next page exists
+                    foot_txt = "ENTER/SPACE = tjetra / next"
+                    if pi > 0:                   # ...and a previous page
+                        foot_txt += "   P = mbrapa / prev"
+                else:                            # last page
+                    foot_txt = "P = mbrapa / prev   ENTER = kthehu / back"
+            if foot_txt:
+                ftxt = foot_txt
                 if probe.textlength(ftxt, font=self._fonts["foot"]) > avail:
                     while ftxt and probe.textlength(ftxt + "…", font=self._fonts["foot"]) > avail:
                         ftxt = ftxt[:-1]
