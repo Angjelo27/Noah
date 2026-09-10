@@ -68,7 +68,7 @@ def _brand(d, im):
         _center(d, "NOAH", F_TITLE, 170)
     _center(d, "by American Labs", F_SUB, 315)
     t = "american.al"
-    d.text((W - d.textlength(t, font=F_HINT) - 40, H - 50), t, font=F_HINT, fill=0)
+    d.text((W - d.textlength(t, font=F_HINT) - 118, H - 150), t, font=F_HINT, fill=0)
 
 
 def home_image(buf="", status="gati · ready"):
@@ -81,7 +81,7 @@ def home_image(buf="", status="gati · ready"):
     _center(d, "Type your question and press ENTER", F_SUB, 680)
     strip = input_image(buf)
     im.paste(Image.fromarray(strip), (0, INPUT_Y))
-    d.text((70, H - 90), status, font=F_HINT, fill=0)
+    d.text((118, H - 150), status, font=F_HINT, fill=0)
     return _np(im)
 
 
