@@ -76,7 +76,7 @@ def home_image(buf="", status="gati · ready"):
     d = ImageDraw.Draw(im)
     _brand(d, im)
     d.line((150, 440, W - 150, 440), fill=0, width=4)
-    _center(d, "Ndihmë e parë emergjente · Emergency first aid", F_SUB, 480)
+    _center(d, "Asistent AI pa internet · Offline AI assistant", F_SUB, 480)
     _center(d, "Shkruaj pyetjen dhe shtyp ENTER", F_SUB, 620)
     _center(d, "Type your question and press ENTER", F_SUB, 680)
     strip = input_image(buf)
@@ -88,15 +88,15 @@ def home_image(buf="", status="gati · ready"):
 def input_image(buf, status=""):
     im = Image.new("L", (W, INPUT_H), 255)
     d = ImageDraw.Draw(im)
-    d.rectangle((60, 4, W - 60, 116), outline=0, width=3)
+    d.rectangle((118, 4, W - 118, 116), outline=0, width=3)   # 1cm from each edge
     shown = "> " + buf + "_"
     trimmed = buf
-    while d.textlength(shown, font=F_IN) > W - 170 and len(trimmed) > 4:
+    while d.textlength(shown, font=F_IN) > W - 284 and len(trimmed) > 4:
         trimmed = trimmed[1:]
         shown = "> …" + trimmed + "_"
-    d.text((84, 28), shown, font=F_IN, fill=0)
+    d.text((142, 28), shown, font=F_IN, fill=0)               # 118 box + 24 inner pad
     if status:
-        d.text((84, 122), status, font=F_HINT, fill=0)
+        d.text((142, 122), status, font=F_HINT, fill=0)
     return _np(im)
 
 
