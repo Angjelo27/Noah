@@ -127,6 +127,65 @@ def embed_query(text):
                       timeout=(10, 120))
     return r.json()["embeddings"][0]
 
+GENERAL_SYSTEM = (
+    "You are NOAH, a helpful offline assistant. Answer the user's everyday or "
+    "general-knowledge question directly and factually, in 1 to 5 short "
+    "sentences, from your own general knowledge. Do NOT give first-aid steps, "
+    "medical or safety warnings, or emergency instructions, and do not mention "
+    "wounds, bleeding, bandages or tourniquets unless the user explicitly asked "
+    "about them. Be concise, neutral and accurate. If you do not know, say so "
+    "briefly.")
+
+
+def _classify_emergency(q_en):
+    """One-word FIRSTAID/GENERAL label with NO reference passages in the
+    prompt, so the survival/first-aid corpus cannot drag a general question
+    (e.g. 'world war 2' -> combat wound advice) into a first-aid answer.
+    Prefers FIRSTAID whenever the label is unclear (safety)."""
+    try:
+        r = requests.post(f"{OLLAMA}/api/generate", json={
+            "model": MODEL,
+            "system": ("Label the user's message with exactly one word. "
+                       "FIRSTAID = it describes an injury, illness, symptom, pain, "
+                       "wound, poisoning, accident, or asks for medical, first-aid "
+                       "or safety help. GENERAL = anything else: greetings, history, "
+                       "geography, science, math, cooking, sports, trivia, "
+                       "definitions, opinions, or everyday questions. "
+                       "Reply with only the word FIRSTAID or GENERAL."),
+            "prompt": q_en,
+            "stream": False,
+            "options": {"temperature": 0, "num_predict": 4},
+        }, timeout=(10, 60))
+        out = r.json().get("response", "").strip().upper()
+    except Exception:
+        return True                              # any failure -> first-aid flow
+    if "FIRST" in out:
+        return True
+    if "GENERAL" in out:
+        return False
+    return True                                  # unclear -> first-aid flow
+
+
+def _general_answer(q_en):
+    """Answer a non-first-aid question from general knowledge, no passages."""
+    try:
+        r = requests.post(f"{OLLAMA}/api/generate", json={
+            "model": MODEL,
+            "system": GENERAL_SYSTEM,
+            "prompt": "QUESTION: %s\n\nANSWER:" % q_en,
+            "stream": False,
+            "options": {"temperature": 0.3, "num_ctx": 1024, "num_predict": 300},
+        }, timeout=(10, 300))
+        resp = r.json().get("response", "").strip()
+    except Exception:
+        resp = ""
+    if re.search(r"(\b\w{1,6}\b)(\s+\1\b){7,}", resp):   # degeneration loop
+        resp = ""
+    if not resp:
+        resp = "Sorry, I could not answer that."
+    return safety.danger_scrub(resp)             # belt: drop any stray unsafe line
+
+
 def answer(question):
     global blinking
     blinking = True
@@ -136,6 +195,16 @@ def answer(question):
             return st, []
         is_sq = MT_OK and translator.is_albanian(question)
         q_en = translator.sq_to_en(question) if is_sq else question
+        # EMERGENCY vs GENERAL routing. A fired safety rule = definitely
+        # first-aid (skip the classifier). Otherwise a no-passage classifier
+        # decides; general questions get a plain knowledge answer so the
+        # first-aid corpus can never pollute them.
+        names = safety.fired_rules(question, q_en, is_sq)
+        if not names and not _classify_emergency(q_en):
+            resp = _general_answer(q_en)
+            if is_sq:
+                resp = translator.en_to_sq(resp)
+            return resp, []
         chunks, sources = retriever.search(q_en, k=TOP_K)
         context = "\n\n---\n\n".join(
             f"[Source: {s}]\n{c}" for s, c in zip(sources, chunks))
@@ -185,7 +254,6 @@ def answer(question):
                 resp = resp.strip()[m.end():]
                 if resp:
                     resp = resp[0].upper() + resp[1:]
-        names = safety.fired_rules(question, q_en, is_sq)
         resp, replaced = safety.body_guard(names, resp, is_sq)
         if not replaced:
             resp = safety.danger_scrub(resp)   # drop inverted-advice sentences
