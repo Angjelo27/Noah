@@ -38,44 +38,73 @@ GHOST_FLUSH_EVERY = 8      # white-flush before every Nth refresh
 
 class EInk:
     def __init__(self, vcom=VCOM_MV, spi_hz=SPI_HZ):
-        self._chip = gpiod.Chip("gpiochip0")
-        self._rst = self._chip.get_line(RST_LINE)
-        self._cs = self._chip.get_line(CS_LINE)
-        self._busy = self._chip.get_line(BUSY_LINE)
-        self._rst.request(consumer="eink", type=gpiod.LINE_REQ_DIR_OUT, default_vals=[1])
-        self._cs.request(consumer="eink", type=gpiod.LINE_REQ_DIR_OUT, default_vals=[1])
-        self._busy.request(consumer="eink", type=gpiod.LINE_REQ_DIR_IN)
-        self._spi = spidev.SpiDev()
-        self._spi.open(0, 0)
-        self._spi.mode = 0
-        self._spi.max_speed_hz = spi_hz
-        self.refreshes = 0
+        # Null the handles first so a failure partway can release cleanly. An
+        # early-boot init can hit a transient EBUSY (the SPI1 pads are still
+        # settling right after the pinmux switch): if that happens AFTER the
+        # gpio lines are requested, leaving them held would make every retry
+        # fail with EBUSY on our own lines. Release on any init failure.
+        self._chip = self._rst = self._cs = self._busy = self._spi = None
+        try:
+            self._chip = gpiod.Chip("gpiochip0")
+            self._rst = self._chip.get_line(RST_LINE)
+            self._cs = self._chip.get_line(CS_LINE)
+            self._busy = self._chip.get_line(BUSY_LINE)
+            self._rst.request(consumer="eink", type=gpiod.LINE_REQ_DIR_OUT, default_vals=[1])
+            self._cs.request(consumer="eink", type=gpiod.LINE_REQ_DIR_OUT, default_vals=[1])
+            self._busy.request(consumer="eink", type=gpiod.LINE_REQ_DIR_IN)
+            self._spi = spidev.SpiDev()
+            self._spi.open(0, 0)
+            self._spi.mode = 0
+            self._spi.max_speed_hz = spi_hz
+            self.refreshes = 0
 
-        # reset + boot (retry: wake from STANDBY/odd states is occasionally slow)
-        for attempt in range(3):
-            self._rst.set_value(0); time.sleep(0.2)
-            self._rst.set_value(1); time.sleep(0.1)
-            try:
-                self._ready(4.0)
-                break
-            except RuntimeError:
-                if attempt == 2:
-                    raise RuntimeError("IT8951 not ready after 3 reset attempts")
-        self._wcmd(0x0001)                       # SYS_RUN
-        self._wcmd(0x0302)                       # GET_DEV_INFO
-        info = self._rdata(20)
-        self.width, self.height = info[0], info[1]
-        self.imgbuf = (info[3] << 16) | info[2]
-        if (self.width, self.height) != (W, H) or not self.imgbuf:
-            raise RuntimeError("bad device info: %s" % info[:4])
-        self._wreg(0x0004, 0x0001)               # I80CPCR: packed write
-        self._wcmd(0x0039); self._wdata(0x0001); self._wdata(vcom)   # set VCOM
+            # reset + boot (retry: wake from STANDBY/odd states is occasionally slow)
+            for attempt in range(3):
+                self._rst.set_value(0); time.sleep(0.2)
+                self._rst.set_value(1); time.sleep(0.1)
+                try:
+                    self._ready(4.0)
+                    break
+                except RuntimeError:
+                    if attempt == 2:
+                        raise RuntimeError("IT8951 not ready after 3 reset attempts")
+            self._wcmd(0x0001)                       # SYS_RUN
+            self._wcmd(0x0302)                       # GET_DEV_INFO
+            info = self._rdata(20)
+            self.width, self.height = info[0], info[1]
+            self.imgbuf = (info[3] << 16) | info[2]
+            if (self.width, self.height) != (W, H) or not self.imgbuf:
+                raise RuntimeError("bad device info: %s" % info[:4])
+            self._wreg(0x0004, 0x0001)               # I80CPCR: packed write
+            self._wcmd(0x0039); self._wdata(0x0001); self._wdata(vcom)   # set VCOM
+        except BaseException:
+            self._release_partial()
+            raise
 
         self._fonts = {
             "title": ImageFont.truetype(FONT_DIR + "DejaVuSans-Bold.ttf", TITLE_SIZE),
             "body":  ImageFont.truetype(FONT_DIR + "DejaVuSans.ttf", BODY_SIZE),
             "foot":  ImageFont.truetype(FONT_DIR + "DejaVuSansMono.ttf", FOOT_SIZE),
         }
+
+    def _release_partial(self):
+        """Release whatever __init__ managed to acquire, on a failed init."""
+        try:
+            if self._spi is not None:
+                self._spi.close()
+        except Exception:
+            pass
+        for ln in (self._rst, self._cs, self._busy):
+            try:
+                if ln is not None:
+                    ln.release()
+            except Exception:
+                pass
+        try:
+            if self._chip is not None:
+                self._chip.close()
+        except Exception:
+            pass
 
     # ---------- low-level protocol ----------
     def _ready(self, tmo=6.0):
