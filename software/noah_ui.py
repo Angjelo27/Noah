@@ -107,6 +107,61 @@ def show_home(buf="", status="gati · ready"):
     _prev_strip = None
 
 
+# ---- boot / loading screen (2026-09-11) ----------------------------------
+# The pipeline (chroma + BM25 import ~2.5s) and the LLM warm-up (~6s cold)
+# finish before the main loop starts, so if we painted the normal typing
+# screen at boot the input box would sit there unresponsive for several
+# seconds. Instead we show a calm loading screen with NO input box until the
+# assistant is actually live, then flash_home() reveals the typing screen.
+# A small ring indicator animates so the device never looks frozen.
+BOOT_BAND_Y, BOOT_BAND_H = 780, 120       # full-width strip for the animated dots
+
+
+def _boot_band_im(k):
+    """3 rings, k of them filled (k = 0..3): a calm 'working' indicator."""
+    im = Image.new("L", (W, BOOT_BAND_H), 255)
+    d = ImageDraw.Draw(im)
+    r, gap = 16, 90
+    cx0 = (W - gap * 2) // 2
+    cy = BOOT_BAND_H // 2
+    for i in range(3):
+        x = cx0 + i * gap
+        box = (x - r, cy - r, x + r, cy + r)
+        if i < k:
+            d.ellipse(box, fill=0)
+        else:
+            d.ellipse(box, outline=0, width=3)
+    return im
+
+
+def boot_image(k=0):
+    im = Image.new("L", (W, H), 255)
+    d = ImageDraw.Draw(im)
+    _brand(d, im)
+    d.line((150, 440, W - 150, 440), fill=0, width=4)
+    _center(d, "Duke u ndezur…  ·  Starting up…", F_SUB, 500)
+    _center(d, "Ju lutem prisni  ·  Please wait", F_SUB, 600)
+    im.paste(_boot_band_im(k), (0, BOOT_BAND_Y))
+    return _np(im)
+
+
+def show_boot():
+    EPD.show(boot_image(0), MODE_DU)
+
+
+def _boot_ticker(done):
+    """Animate the ring band via cheap full-width partial DU until done is set."""
+    k = 0
+    while not done.wait(0.7):
+        k = k % 3 + 1
+        try:
+            strip = _np(_boot_band_im(k))
+            EPD._load(strip, 0, BOOT_BAND_Y)
+            EPD._display(MODE_DU, 0, BOOT_BAND_Y, W, BOOT_BAND_H)
+        except Exception:
+            return
+
+
 _home_np = None
 _sleep_req = False
 SLEEP_FLAG = "/run/noah-sleep-drawn"
@@ -426,10 +481,15 @@ def main():
     buf = ""
     try:
         threading.Thread(target=_power_button_thread, daemon=True).start()
-        show_home("", "duke u ndezur… · starting…")
-        ok = warm_model()
+        show_boot()                            # calm loading screen (no input box)
+        boot_done = threading.Event()
+        bt = threading.Thread(target=_boot_ticker, args=(boot_done,), daemon=True)
+        bt.start()
+        ok = warm_model()                      # ~6s cold: input box must NOT be up yet
+        boot_done.set()
+        bt.join(timeout=2)
         if ok:
-            flash_home()                       # deep first paint: clean over any retained image
+            flash_home()                       # reveal the typing screen, crisp over the loader
         else:
             show_home("", "gabim modeli · model error")
         print("[noah-ui] READY", flush=True)
