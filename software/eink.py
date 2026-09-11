@@ -58,23 +58,31 @@ class EInk:
             self._spi.max_speed_hz = spi_hz
             self.refreshes = 0
 
-            # reset + boot (retry: wake from STANDBY/odd states is occasionally slow)
-            for attempt in range(3):
+            # Reset + boot, then read device info. BOTH the wake (HRDY) and the
+            # GET_DEV_INFO read can glitch at cold boot: a desynced SPI read
+            # returns shifted words (observed: height read back as 1872 instead
+            # of 1404), which used to FATAL the whole UI and force a restart.
+            # Retry the entire reset -> SYS_RUN -> GET_DEV_INFO on a bad read.
+            info = None
+            for attempt in range(4):
                 self._rst.set_value(0); time.sleep(0.2)
                 self._rst.set_value(1); time.sleep(0.1)
                 try:
                     self._ready(4.0)
-                    break
                 except RuntimeError:
-                    if attempt == 2:
-                        raise RuntimeError("IT8951 not ready after 3 reset attempts")
-            self._wcmd(0x0001)                       # SYS_RUN
-            self._wcmd(0x0302)                       # GET_DEV_INFO
-            info = self._rdata(20)
+                    if attempt == 3:
+                        raise RuntimeError("IT8951 not ready after 4 reset attempts")
+                    continue
+                self._wcmd(0x0001)                   # SYS_RUN
+                self._wcmd(0x0302)                   # GET_DEV_INFO
+                info = self._rdata(20)
+                if (info[0], info[1]) == (W, H) and ((info[3] << 16) | info[2]):
+                    break                            # good, synced read
+                if attempt == 3:
+                    raise RuntimeError("bad device info after 4 tries: %s" % info[:4])
+                time.sleep(0.15)                     # desynced read: reset & retry
             self.width, self.height = info[0], info[1]
             self.imgbuf = (info[3] << 16) | info[2]
-            if (self.width, self.height) != (W, H) or not self.imgbuf:
-                raise RuntimeError("bad device info: %s" % info[:4])
             self._wreg(0x0004, 0x0001)               # I80CPCR: packed write
             self._wcmd(0x0039); self._wdata(0x0001); self._wdata(vcom)   # set VCOM
         except BaseException:
