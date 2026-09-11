@@ -486,6 +486,10 @@ def main():
         bt = threading.Thread(target=_boot_ticker, args=(boot_done,), daemon=True)
         bt.start()
         ok = warm_model()                      # ~6s cold: input box must NOT be up yet
+        if ok:
+            time.sleep(5.0)                    # hold the loading screen 5s longer than
+                                               # needed (ticker keeps animating) before
+                                               # revealing the typing screen
         boot_done.set()
         bt.join(timeout=2)
         if ok:
